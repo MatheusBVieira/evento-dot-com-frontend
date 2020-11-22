@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { Divider, Button } from '@material-ui/core';
 
-export const StyledContainer = styled.div`
+export const StyledContainer = styled.article`
   max-width: 1280px;
   margin: 2.5rem auto;
   padding: 2.5rem;

@@ -16,19 +16,18 @@ export const Title = styled.a`
   color: ${({ theme }) => theme.colors.primaryText};
   text-decoration: none;
   cursor: pointer;
-  margin-right: 30px;
-  padding: 0.5rem;
-  margin-left: 1px;
+  margin: 0.5rem;
+  padding: 0 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 1rem;
 
   :hover {
-    border: ${({ theme }) => `1px solid ${theme.colors.primaryTextDarker}`};
-    border-radius: 1rem;
+    border-color: ${({ theme }) => theme.colors.primaryTextDarker};
     color: ${({ theme }) => theme.colors.primaryTextDarker};
-    margin-left: 0px;
   }
 `;
 
-export const HeaderRoutes = styled.div`
+export const HeaderRoutes = styled.nav`
   display: flex;
   flex: 1;
   justify-content: flex-end;

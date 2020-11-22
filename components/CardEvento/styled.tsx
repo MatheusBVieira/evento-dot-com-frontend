@@ -5,19 +5,23 @@ import { Button } from '@material-ui/core';
 export const CardContainer = styled.div`
   width: 346px;
   height: 346px;
-  background-color: ${({ theme }) => theme.colors.backgroundLight};
-  ${({ theme }) => theme.elevation[0]}
-  border-radius: 0.5rem;
   margin: 1rem;
   overflow: hidden;
+  background-color: ${({ theme }) => theme.colors.backgroundLight};
+  border-radius: 0.5rem;
+  ${({ theme }) => theme.elevation[1]}
 `;
 
 export const EventoImage = styled.div`
   width: 100%;
+  height: 40%;
 `;
 
 export const EventoDetalhe = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 1rem;
+  height: 60%;
 `;
 
 export const EventoNome = styled.p`
@@ -34,8 +38,8 @@ export const EventoDescricao = styled.span`
 
 export const StyledButton = styled(Button)`
   && {
-    margin-top: 1rem;
-    display: block;
+    width: fit-content;
+    margin-top: auto;
     font: ${({ theme }) => theme.fonts.regular};
   }
 `;

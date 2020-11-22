@@ -5,7 +5,11 @@ const CarouselStyles = createGlobalStyle`
   .rec.rec-arrow {
     color: ${({ theme }) => theme.colors.ligthText};
     background-color: transparent;
-    border: 1px solid  ${({ theme }) => theme.colors.complementText}
+    border: 1px solid  ${({ theme }) => theme.colors.complementText};
+
+    @media (max-width: 725px){
+      display: none;
+    }
   }
   
   .rec.rec-arrow:hover, .rec.rec-arrow:focus {

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.article`
   width: 100%;
   margin: 2.5rem 0;
 `;

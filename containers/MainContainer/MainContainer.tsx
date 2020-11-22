@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Header } from '../../components';
+import { Header, Footer } from '../../components';
 import { PageMain, Content, BackgoundImage } from './styled';
 
 import DestaqueEvento from './DestaqueEvento';
@@ -18,6 +18,7 @@ const MainContainer = () => {
         <ListCategoriaEvento />
         <ListCategoriaEvento />
       </Content>
+      <Footer />
     </PageMain>
   );
 };

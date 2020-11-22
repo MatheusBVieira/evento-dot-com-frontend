@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PageMain = styled.div`
+export const PageMain = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,7 +8,7 @@ export const PageMain = styled.div`
   width: 100vw;
 `;
 
-export const Content = styled.div`
+export const Content = styled.section`
   position: relative;
   width: 100%;
 `;
