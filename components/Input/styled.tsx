@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
-export const InputBlock = styled.div`
+type InputBlockProps = {
+  fullWidth?: boolean;
+};
+
+export const InputBlock = styled.div<InputBlockProps>`
   position: relative;
+  ${({ fullWidth }) => (fullWidth ? `width: 100%;` : '')};
 
   :focus-within:after,
   :hover:after {
@@ -29,6 +34,7 @@ export const InputBox = styled.div`
 `;
 
 export const StyledInput = styled.input`
+  width: 100%;
   color: ${({ theme }) => theme.colors.complementText};
   background-color: transparent;
   border: none;

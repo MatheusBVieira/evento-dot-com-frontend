@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
+import { useRouter } from 'next/router';
 import { MenuOutline } from '@styled-icons/evaicons-outline';
 
 import {
@@ -11,27 +12,75 @@ import {
   IconButton,
 } from './styled';
 
+const routes = [
+  {
+    name: 'Buscar eventos',
+    route: '/eventos',
+  },
+  {
+    name: 'Organize seu evento',
+    route: '/criar-evento',
+  },
+  {
+    name: 'Acesse sua conta',
+    route: '/conta',
+  },
+  {
+    name: 'Cadastre-se',
+    route: '/conta',
+    buttonProps: { border: true },
+  },
+];
+
 const Header = () => {
+  const router = useRouter();
   const [showSideBar, setShowSideBar] = useState(false);
+
+  const handleRoute = (route) => {
+    router.push(route);
+  };
+
+  const handleKeydown = (e, route) => {
+    if (e.key === 'Enter') {
+      handleRoute(route);
+    }
+  };
+
   return (
     <>
       <HeaderContainer>
-        <Title>Evento.com</Title>
+        <Title
+          onClick={() => handleRoute('/')}
+          onKeyDown={(e) => handleKeydown(e, '/')}
+        >
+          Evento.com
+        </Title>
         <HeaderRoutes>
-          <RouteText>Buscar eventos</RouteText>
-          <RouteText>Organize seu evento</RouteText>
-          <RouteText>Acesse sua conta</RouteText>
-          <RouteText border>Cadastre-se</RouteText>
+          {routes.map(({ route, name, buttonProps }) => (
+            <RouteText
+              key={name}
+              onClick={() => handleRoute(route)}
+              onKeyDown={(e) => handleKeydown(e, route)}
+              {...buttonProps}
+            >
+              {name}
+            </RouteText>
+          ))}
         </HeaderRoutes>
         <IconButton onClick={() => setShowSideBar(true)}>
           <MenuOutline />
         </IconButton>
       </HeaderContainer>
       <StyledDrawer open={showSideBar} onClose={() => setShowSideBar(false)}>
-        <RouteText>Buscar eventos</RouteText>
-        <RouteText>Organize seu evento</RouteText>
-        <RouteText>Acesse sua conta</RouteText>
-        <RouteText border>Cadastra-se</RouteText>
+        {routes.map(({ route, name, buttonProps }) => (
+          <RouteText
+            {...buttonProps}
+            onClick={() => handleRoute(route)}
+            onKeyDown={(e) => handleKeydown(e, route)}
+          >
+            {name}
+          </RouteText>
+        ))}
       </StyledDrawer>
     </>
   );

@@ -29,6 +29,7 @@ export const theme = {
     title: "700 2.5rem 'Baloo Tamma 2'",
     regularSemiBold: '500 1.6rem Poppins',
     regular: '1.6rem Poppins',
+    regularSmall: '1.4rem Poppins',
   },
   elevation: [
     `box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);`,

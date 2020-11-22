@@ -10,6 +10,7 @@ type Props = {
   initialValue?: string | number;
   onChange: (target: { name: string; value: string | number }) => void;
   startAdorment?: ReactNode;
+  fullWidth?: boolean;
 };
 
 type InputProps = Props &
@@ -24,6 +25,7 @@ const Input: React.FC<InputProps> = memo(
     name,
     required,
     startAdorment,
+    fullWidth,
     ...rest
   }) => {
     const [value, setValue] = useState(initialValue);
@@ -49,7 +51,7 @@ const Input: React.FC<InputProps> = memo(
     };
 
     return (
-      <InputBlock>
+      <InputBlock fullWidth={fullWidth}>
         {label && (
           <Label htmlFor={name} color={color} required={required}>
             {label}
