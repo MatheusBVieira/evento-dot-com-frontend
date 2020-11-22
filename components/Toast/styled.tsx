@@ -13,7 +13,7 @@ export const ToastItem = styled.div`
   display: flex;
   align-items: center;
   background-color: ${({ theme, color }) => theme.colors[color]};
-  color: ${({ theme }) => theme.colors.primaryTitle};
+  color: ${({ theme }) => theme.colors.ligthText};
   border-radius: 5px;
   overflow: hidden;
   cursor: pointer;
@@ -31,7 +31,7 @@ export const CloseButton = styled.button`
   top: 0;
   border: none;
   background: transparent;
-  color: ${({ theme }) => theme.colors.primaryTitle};
+  color: ${({ theme }) => theme.colors.ligthText};
   cursor: pointer;
 
   :hover {
