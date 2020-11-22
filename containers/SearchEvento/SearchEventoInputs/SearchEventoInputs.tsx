@@ -8,7 +8,8 @@ import {
 } from './styled';
 
 let searchTerm = 'Lorem Ipsun';
-const SearchEvento = () => {
+
+const SearchEventoInputs = () => {
   return (
     <SearchContainer>
       <SearchInput>
@@ -38,4 +39,4 @@ const SearchEvento = () => {
   );
 };
 
-export default SearchEvento;
+export default SearchEventoInputs;

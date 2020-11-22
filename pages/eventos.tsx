@@ -1,7 +1,7 @@
 import Head from 'next/head';
 
 import { FadeIn } from '../components';
-import ListEventos from '../containers/ListEventos';
+import SearchEvento from '../containers/SearchEvento';
 
 const Eventos = () => {
   return (
@@ -10,7 +10,7 @@ const Eventos = () => {
         <title>Evento.com - Eventos</title>
       </Head>
       <FadeIn orientation="right-to-left">
-        <ListEventos />
+        <SearchEvento />
       </FadeIn>
     </>
   );

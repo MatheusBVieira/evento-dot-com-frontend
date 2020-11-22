@@ -10,5 +10,4 @@ export const Container = styled.main`
 
 export const Content = styled.section`
   width: 100%;
-  height: 100%;
 `;
