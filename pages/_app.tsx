@@ -3,7 +3,7 @@ import { AppProps } from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { ThemeProvider as MaterialThemeProvider } from '@material-ui/core';
 import { AnimatePresence } from 'framer-motion';
-import { ToastProvider } from '../components';
+import { ToastProvider, AxiosProvider } from '../components';
 import { theme, materialTheme } from '../styles/theme';
 
 const GlobalStyles = createGlobalStyle`
@@ -51,6 +51,7 @@ const GlobalStyles = createGlobalStyle`
   }
  
   ::-webkit-scrollbar-thumb {
+    border-left: 2px solid ${({ theme }) => theme.colors.background};
     background-color: ${({ theme }) => theme.colors.backgroundSecondary}; 
   }
 `;
@@ -62,7 +63,9 @@ const App = ({ Component, pageProps }: AppProps) => {
         <MaterialThemeProvider theme={materialTheme}>
           <GlobalStyles />
           <ToastProvider>
-            <Component {...pageProps} />
+            <AxiosProvider>
+              <Component {...pageProps} />
+            </AxiosProvider>
           </ToastProvider>
         </MaterialThemeProvider>
       </ThemeProvider>

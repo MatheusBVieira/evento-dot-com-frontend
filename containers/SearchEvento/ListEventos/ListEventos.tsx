@@ -1,5 +1,5 @@
 import { CardEvento } from '../../../components';
-import { ListBanner, ListContainer } from './styled';
+import { ListBanner, ListContainer, LoadMore } from './styled';
 
 const cards = [
   {
@@ -31,6 +31,9 @@ const ListEventos = () => {
           <CardEvento key={index} {...card} />
         ))}
       </ListContainer>
+      <LoadMore variant="contained" color="secondary">
+        Ver mais eventos
+      </LoadMore>
     </ListBanner>
   );
 };

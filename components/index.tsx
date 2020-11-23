@@ -1,3 +1,5 @@
+export { default as AxiosProvider, useAxios } from './AxiosProvider';
+
 export { default as CardEvento } from './CardEvento';
 
 export { default as Carousel } from './Carousel';

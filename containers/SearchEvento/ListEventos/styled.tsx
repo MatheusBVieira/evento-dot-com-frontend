@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
+import { Button } from '@material-ui/core';
+
 export const ListBanner = styled.article`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   padding: 1rem 0;
   background-color: ${({ theme }) => theme.colors.backgroundSecondary};
@@ -20,5 +25,13 @@ export const ListContainer = styled.div`
 
   @media (min-width: 1080px) {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+`;
+
+export const LoadMore = styled(Button)`
+  && {
+    width: fit-content;
+    margin: 2rem auto;
+    font: ${({ theme }) => theme.fonts.regular};
   }
 `;
