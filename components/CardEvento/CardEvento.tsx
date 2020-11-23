@@ -8,21 +8,20 @@ import {
   StyledButton,
 } from './styled';
 
-const CardEvento = () => {
+type CardEvento = {
+  name: string;
+  descricao: string;
+};
+
+const CardEvento: React.FC<CardEvento> = ({ name, descricao }) => {
   return (
     <CardContainer>
       <EventoImage>
         <Image src="/evento.jpg" width="346" height="140" layout="responsive" />
       </EventoImage>
       <EventoDetalhe>
-        <EventoNome>Lorem Ipsum</EventoNome>
-        <EventoDescricao>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since
-        </EventoDescricao>
+        <EventoNome>{name}</EventoNome>
+        <EventoDescricao>{descricao}</EventoDescricao>
         <StyledButton variant="contained" color="secondary">
           Ver mais
         </StyledButton>

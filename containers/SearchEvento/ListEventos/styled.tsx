@@ -11,5 +11,14 @@ export const ListContainer = styled.div`
   display: grid;
   max-width: 1280px;
   margin: auto;
-  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 725px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: 1080px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 `;
