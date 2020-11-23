@@ -1,8 +1,13 @@
 import { useRef, useState } from 'react';
 
-import { Menu, MenuItem } from '@material-ui/core';
+import { Menu } from '@material-ui/core';
 
-import { OrderByArrow, OrderByButton, OrderByText } from './styled';
+import {
+  OrderByArrow,
+  OrderByButton,
+  OrderByText,
+  StyledMenuItem,
+} from './styled';
 
 type MenuOption = {
   value: string | number;
@@ -11,16 +16,20 @@ type MenuOption = {
 
 type MenuButtonProps = {
   label: string;
+  defaultValue?: MenuOption['value'];
   options: Array<MenuOption>;
   onChange: (option: MenuOption['value']) => void;
 };
 
 const MenuButton: React.FC<MenuButtonProps> = ({
   label,
+  defaultValue,
   options,
   onChange,
 }) => {
-  const [orderBy, setOrderBy] = useState('');
+  const { label: defaultLabel } =
+    options.find((option) => option.value === defaultValue) ?? options[0];
+  const [orderBy, setOrderBy] = useState(defaultLabel);
   const [open, setOpen] = useState(false);
   const anchorEl = useRef<null | HTMLButtonElement>(null);
 
@@ -47,17 +56,20 @@ const MenuButton: React.FC<MenuButtonProps> = ({
         onClose={handleClose}
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'center',
+          horizontal: 'right',
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'center',
+          horizontal: 'right',
         }}
       >
         {options.map((option) => (
-          <MenuItem key={option.value} onClick={() => handleClick(option)}>
+          <StyledMenuItem
+            key={option.value}
+            onClick={() => handleClick(option)}
+          >
             {option.label}
-          </MenuItem>
+          </StyledMenuItem>
         ))}
       </Menu>
     </>

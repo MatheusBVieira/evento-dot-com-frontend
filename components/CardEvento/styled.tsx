@@ -15,6 +15,10 @@ export const CardContainer = styled.div`
 export const EventoImage = styled.div`
   width: 100%;
   height: 40%;
+
+  img {
+    object-fit: cover;
+  }
 `;
 
 export const EventoDetalhe = styled.div`

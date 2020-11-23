@@ -1,22 +1,22 @@
 import Head from 'next/head';
 
 import { FadeIn } from '../components';
-import SearchEvento from '../containers/SearchEvento';
+import FormEvento from '../containers/FormEvento';
 import PageContainer from '../containers/PageContainer';
 
-const Eventos = () => {
+const CriarEvento = () => {
   return (
     <>
       <Head>
-        <title>Evento.com - Eventos</title>
+        <title>Evento.com - Cadastro eventos</title>
       </Head>
       <FadeIn orientation="right-to-left">
         <PageContainer>
-          <SearchEvento />
+          <FormEvento />
         </PageContainer>
       </FadeIn>
     </>
   );
 };
 
-export default Eventos;
+export default CriarEvento;

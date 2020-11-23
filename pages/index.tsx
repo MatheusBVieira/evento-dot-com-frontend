@@ -2,6 +2,7 @@ import Head from 'next/head';
 
 import { FadeIn } from '../components';
 import MainContainer from '../containers/MainContainer';
+import PageContainer from '../containers/PageContainer';
 
 const Home = () => (
   <>
@@ -10,7 +11,9 @@ const Home = () => (
     </Head>
 
     <FadeIn orientation="down-to-up">
-      <MainContainer />
+      <PageContainer>
+        <MainContainer />
+      </PageContainer>
     </FadeIn>
   </>
 );

@@ -1,3 +1,5 @@
+import { ReactText, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { Input, MenuButton } from '../../../components';
 import {
   SearchContainer,
@@ -7,32 +9,59 @@ import {
   SearchIcon,
 } from './styled';
 
-let searchTerm = 'Lorem Ipsun';
+type QueryParams = {
+  term: ReactText;
+  orderBy: ReactText;
+};
 
 const SearchEventoInputs = () => {
+  const router = useRouter();
+  const [searchTerm, setSearchTerm] = useState<ReactText>();
+  const [query, setQuery] = useState(router.query as QueryParams);
+  const { term, orderBy } = query;
+
+  const handleSearchTerm = () => {
+    setQuery((prev) => ({ ...prev, term: searchTerm }));
+  };
+
+  const handleOrderBy = (value) => {
+    setQuery((prev) => ({ ...prev, orderBy: value }));
+  };
+
+  useEffect(() => {
+    if (query) {
+      router.push({ query });
+    }
+  }, [query]);
+
   return (
     <SearchContainer>
       <SearchInput>
         <Input
           startAdorment={<SearchIcon />}
           fullWidth
-          onChange={console.log}
+          onChange={({ value }) => setSearchTerm(value)}
           placeholder="Pesquisar eventos"
         />
-        <StyledButton variant="contained" color="secondary">
+        <StyledButton
+          onClick={handleSearchTerm}
+          variant="contained"
+          color="secondary"
+        >
           Buscar
         </StyledButton>
       </SearchInput>
 
       <SearchTerm>
-        Termo de busca:&nbsp;<span>{searchTerm}</span>
+        Termo de busca:&nbsp;<span>{term}</span>
       </SearchTerm>
       <MenuButton
         label="Ordenar por"
-        onChange={console.log}
+        defaultValue={orderBy}
+        onChange={handleOrderBy}
         options={[
-          { label: 'Menor preço', value: 0 },
-          { label: 'Maior preço', value: 1 },
+          { label: 'Menor preço', value: 'MENOR_PRECO' },
+          { label: 'Maior preço', value: 'MAIOR_PRECO' },
         ]}
       />
     </SearchContainer>

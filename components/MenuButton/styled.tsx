@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ChevronDownOutline } from '@styled-icons/evaicons-outline';
-import { Button } from '@material-ui/core';
+import { Button, MenuItem } from '@material-ui/core';
 
 export const OrderByButton = styled(Button)`
   && {
@@ -20,4 +20,11 @@ export const OrderByArrow = styled(ChevronDownOutline)`
 
 export const OrderByText = styled.p`
   color: ${({ theme }) => theme.colors.primaryText};
+`;
+
+export const StyledMenuItem = styled(MenuItem)`
+  && {
+    font: ${({ theme }) => theme.fonts.regularSmall};
+    color: ${({ theme }) => theme.colors.baseText};
+  }
 `;
