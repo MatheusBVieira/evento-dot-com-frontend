@@ -27,7 +27,7 @@ const routes = [
   },
   {
     name: 'Cadastre-se',
-    route: '/conta',
+    route: '/criar-conta',
     buttonProps: { border: true },
   },
 ];

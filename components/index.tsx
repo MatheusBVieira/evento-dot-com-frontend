@@ -1,4 +1,8 @@
+export { default as AuthProvider, useAuth } from './AuthProvider';
+
 export { default as AxiosProvider, useAxios } from './AxiosProvider';
+
+export { default as Button } from './Button';
 
 export { default as CardEvento } from './CardEvento';
 
@@ -17,5 +21,9 @@ export { default as Label } from './Label';
 export { default as MenuButton } from './MenuButton';
 
 export { default as ProgressBar } from './ProgressBar';
+
+export { default as Select } from './Select';
+
+export { default as Textarea } from './Textarea';
 
 export { ToastProvider, useToast } from './Toast';

@@ -3,7 +3,7 @@ import { AppProps } from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { ThemeProvider as MaterialThemeProvider } from '@material-ui/core';
 import { AnimatePresence } from 'framer-motion';
-import { ToastProvider, AxiosProvider } from '../components';
+import { ToastProvider, AxiosProvider, AuthProvider } from '../components';
 import { theme, materialTheme } from '../styles/theme';
 
 const GlobalStyles = createGlobalStyle`
@@ -63,9 +63,11 @@ const App = ({ Component, pageProps }: AppProps) => {
         <MaterialThemeProvider theme={materialTheme}>
           <GlobalStyles />
           <ToastProvider>
-            <AxiosProvider>
-              <Component {...pageProps} />
-            </AxiosProvider>
+            <AuthProvider>
+              <AxiosProvider url={process.env.NEXT_PUBLIC_SERVER_URL}>
+                <Component {...pageProps} />
+              </AxiosProvider>
+            </AuthProvider>
           </ToastProvider>
         </MaterialThemeProvider>
       </ThemeProvider>

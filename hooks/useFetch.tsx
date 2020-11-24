@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAxios } from '../components';
+import { useAxios, useToast } from '../components';
 import { AxiosRequestConfig } from 'axios';
 
 enum METHODS {
@@ -17,9 +17,10 @@ type FetchParams = {
 };
 
 const useFetch = ({ method, path, options, variables }: FetchParams) => {
+  const showToast = useToast();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any>();
-  const [error, setError] = useState<any>();
+
   const api = useAxios();
   const action = api[method] as any;
 
@@ -27,7 +28,7 @@ const useFetch = ({ method, path, options, variables }: FetchParams) => {
     setLoading(true);
     action(path, { params, ...options })
       .then(handleData)
-      .catch((e: any) => setError(e))
+      .catch((e: Error) => showToast(e.message, { type: 'error' }))
       .finally(() => setLoading(false));
   };
 
@@ -37,13 +38,16 @@ const useFetch = ({ method, path, options, variables }: FetchParams) => {
     });
   }, []);
 
-  const fetchMore = (fetchMoreOptions?: any) => {
+  const fetchMore = (
+    fetchMoreOptions: any,
+    updateDate: (prev: any, data: any) => any
+  ) => {
     handleRequest(fetchMoreOptions, ({ data }) => {
-      setData((prev) => (Array.isArray(prev) ? [...prev, data] : [prev, data]));
+      setData((prev: any) => updateDate(prev, data));
     });
   };
 
-  return { loading, error, data, fetchMore };
+  return { loading, data, fetchMore };
 };
 
 export default useFetch;

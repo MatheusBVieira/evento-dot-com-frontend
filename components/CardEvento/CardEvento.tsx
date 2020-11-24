@@ -9,19 +9,19 @@ import {
 } from './styled';
 
 type CardEvento = {
-  name: string;
-  descricao: string;
+  nome: string;
+  categoria: string;
 };
 
-const CardEvento: React.FC<CardEvento> = ({ name, descricao }) => {
+const CardEvento: React.FC<CardEvento> = ({ nome, categoria }) => {
   return (
     <CardContainer>
       <EventoImage>
         <Image src="/evento.jpg" width="346" height="140" layout="responsive" />
       </EventoImage>
       <EventoDetalhe>
-        <EventoNome>{name}</EventoNome>
-        <EventoDescricao>{descricao}</EventoDescricao>
+        <EventoNome>{nome}</EventoNome>
+        <EventoDescricao>{categoria}</EventoDescricao>
         <StyledButton variant="contained" color="secondary">
           Ver mais
         </StyledButton>

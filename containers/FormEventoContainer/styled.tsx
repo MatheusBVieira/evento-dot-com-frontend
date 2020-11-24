@@ -1,0 +1,24 @@
+import styled from 'styled-components';
+import { Grid } from '@material-ui/core';
+
+export const Container = styled.main`
+  max-width: 1280px;
+  margin: 3rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const FormContent = styled(Grid)`
+  && {
+    margin: 2rem 0;
+    padding: 2.5rem 5rem;
+    border-radius: 2rem;
+    background-color: ${({ theme }) => theme.colors.backgroundSecondary};
+  }
+`;
+
+export const FormTitle = styled.p`
+  font: ${({ theme }) => theme.fonts.title};
+  color: ${({ theme }) => theme.colors.ligthText};
+`;

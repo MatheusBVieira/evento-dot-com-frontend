@@ -8,9 +8,10 @@ type Props = {
   label?: string;
   color?: Colors;
   initialValue?: string | number;
-  onChange: (target: { name: string; value: string | number }) => void;
+  onChange?: (target: { name: string; value: string | number }) => void;
   startAdorment?: ReactNode;
   fullWidth?: boolean;
+  mask?: string;
 };
 
 type InputProps = Props &
@@ -26,6 +27,7 @@ const Input: React.FC<InputProps> = memo(
     required,
     startAdorment,
     fullWidth,
+    mask,
     ...rest
   }) => {
     const [value, setValue] = useState(initialValue);
@@ -41,9 +43,9 @@ const Input: React.FC<InputProps> = memo(
       if (type === 'number') {
         inputValue = value.replace(/\D/g, '');
         newValue = parseNumber(inputValue);
-      } else if (type === 'tel') {
+      } else if (mask) {
         newValue = parseNumber(value.replace(/\D/g, ''));
-        inputValue = stringFormat('(##) #####-####', newValue);
+        inputValue = stringFormat(mask, newValue);
       }
 
       setValue(inputValue ?? '');
@@ -75,7 +77,8 @@ const Input: React.FC<InputProps> = memo(
 
 Input.defaultProps = {
   type: 'text',
-  color: 'complementText',
+  color: 'ligthText',
+  onChange: () => {},
 };
 
 export default Input;

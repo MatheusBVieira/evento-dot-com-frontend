@@ -35,11 +35,14 @@ export const InputBox = styled.div`
 
 export const StyledInput = styled.input`
   width: 100%;
-  color: ${({ theme }) => theme.colors.complementText};
   background-color: transparent;
   border: none;
   outline: 0;
   font: ${({ theme }) => theme.fonts.regular};
+
+  ::placeholder {
+    color: ${({ theme }) => theme.colors.complementText};
+  }
 
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
