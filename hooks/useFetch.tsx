@@ -14,9 +14,10 @@ type FetchParams = {
   method: keyof typeof METHODS;
   options?: Omit<AxiosRequestConfig, 'params'>;
   variables?: any;
+  skip?: boolean;
 };
 
-const useFetch = ({ method, path, options, variables }: FetchParams) => {
+const useFetch = ({ method, path, skip, options, variables }: FetchParams) => {
   const showToast = useToast();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any>();
@@ -33,10 +34,12 @@ const useFetch = ({ method, path, options, variables }: FetchParams) => {
   };
 
   useEffect(() => {
-    handleRequest(variables, ({ data }) => {
-      setData(data);
-    });
-  }, []);
+    if (!skip) {
+      handleRequest(variables, ({ data }) => {
+        setData(data);
+      });
+    }
+  }, [skip, variables]);
 
   const fetchMore = (
     fetchMoreOptions: any,

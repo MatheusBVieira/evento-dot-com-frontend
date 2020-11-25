@@ -1,32 +1,43 @@
-import Image from 'next/image';
+import { useRouter } from 'next/router';
 import {
-  CardContainer,
-  EventoImage,
-  EventoDetalhe,
   EventoNome,
+  EventoPreco,
+  EventoHeader,
   EventoDescricao,
   StyledButton,
 } from './styled';
+import Card from '../Card';
+import { toCurrency } from '../../utils/toCurrency';
 
 type CardEvento = {
   nome: string;
-  categoria: string;
+  descricao: string;
+  preco: number;
+  id: number;
 };
 
-const CardEvento: React.FC<CardEvento> = ({ nome, categoria }) => {
+const CardEvento: React.FC<CardEvento> = ({ nome, descricao, preco, id }) => {
+  const { push } = useRouter();
+
+  const handleClickCard = () => {
+    id && push(`/evento/${id}`);
+  };
+
   return (
-    <CardContainer>
-      <EventoImage>
-        <Image src="/evento.jpg" width="346" height="140" layout="responsive" />
-      </EventoImage>
-      <EventoDetalhe>
+    <Card image="/evento.jpg">
+      <EventoHeader>
         <EventoNome>{nome}</EventoNome>
-        <EventoDescricao>{categoria}</EventoDescricao>
-        <StyledButton variant="contained" color="secondary">
-          Ver mais
-        </StyledButton>
-      </EventoDetalhe>
-    </CardContainer>
+        <EventoPreco>{toCurrency(preco)}</EventoPreco>
+      </EventoHeader>
+      <EventoDescricao>{descricao}</EventoDescricao>
+      <StyledButton
+        onClick={handleClickCard}
+        variant="contained"
+        color="secondary"
+      >
+        Ver mais
+      </StyledButton>
+    </Card>
   );
 };
 

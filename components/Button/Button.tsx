@@ -20,6 +20,7 @@ enum VARIANT {
 type ButtonProps = {
   loading?: boolean;
   variant?: keyof typeof VARIANT;
+  onClick?: MaterialButtonProps['onClick'];
   buttonProps?: Omit<MaterialButtonProps, keyof 'color'>;
 };
 
@@ -28,6 +29,7 @@ const Button: React.FC<ButtonProps> = ({
   variant,
   loading,
   buttonProps,
+  onClick,
 }) => {
   const VARIANTS = {
     primary: {
@@ -47,6 +49,7 @@ const Button: React.FC<ButtonProps> = ({
       color={color}
       variant={buttonVariant}
       disabled={loading}
+      onClick={onClick}
       {...buttonProps}
     >
       {children}

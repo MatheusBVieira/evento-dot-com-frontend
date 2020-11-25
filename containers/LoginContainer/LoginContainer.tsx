@@ -10,6 +10,11 @@ const LoginContainer = () => {
   const [loginPost, { loading }] = useMutate({
     method: 'post',
     path: '/auth',
+    options: {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
   });
 
   const handleFormChange = ({ value, name }) => {

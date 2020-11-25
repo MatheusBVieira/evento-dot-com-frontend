@@ -27,8 +27,9 @@ export const theme = {
     errorDark: '#a52f26',
   },
   fonts: {
+    titleLarge: "700 3rem 'Baloo Tamma 2'",
     title: "700 2.5rem 'Baloo Tamma 2'",
-    regularSemiBold: '500 1.6rem Poppins',
+    regularSemiBold: '600 1.6rem Poppins',
     regular: '1.6rem Poppins',
     regularSmall: '1.4rem Poppins',
   },

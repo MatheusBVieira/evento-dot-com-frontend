@@ -7,7 +7,7 @@ type LabelProps = {
 
 const Label = styled.label<LabelProps>`
   color: ${({ theme, color }) => theme.colors[color]};
-  font: ${({ theme, color }) => theme.fonts.regularSemiBold};
+  font: ${({ theme }) => theme.fonts.regularSemiBold};
 
   :after {
     ${({ required }) => required && `content: ' * '; color: red;`};

@@ -45,7 +45,7 @@ const FormEventoDetail: React.FC<FormEventoDetailProps> = memo(
           <Input
             label="Capacidade maxíma local"
             name="capacidade_max"
-            placeholder="10"
+            placeholder="Digite a capacidade max."
             type="number"
             onChange={handleFormChange}
             required
@@ -54,7 +54,7 @@ const FormEventoDetail: React.FC<FormEventoDetailProps> = memo(
         <Grid item lg={2} md={4} sm={6} xs={12}>
           <Input
             label="Ingressos"
-            value={(0.4 * Number(detail.capacidade_max)).toFixed(0)}
+            value={(0.4 * Number(detail.capacidade_max ?? '')).toFixed(0)}
             disabled
             required
           />

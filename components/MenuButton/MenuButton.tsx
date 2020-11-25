@@ -28,7 +28,7 @@ const MenuButton: React.FC<MenuButtonProps> = ({
   onChange,
 }) => {
   const { label: defaultLabel } =
-    options.find((option) => option.value === defaultValue) ?? options[0];
+    options.find((option) => option.value === defaultValue) ?? {};
   const [orderBy, setOrderBy] = useState(defaultLabel);
   const [open, setOpen] = useState(false);
   const anchorEl = useRef<null | HTMLButtonElement>(null);

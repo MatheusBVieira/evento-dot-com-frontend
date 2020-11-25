@@ -4,9 +4,15 @@ export { default as AxiosProvider, useAxios } from './AxiosProvider';
 
 export { default as Button } from './Button';
 
+export { default as Card } from './Card';
+
 export { default as CardEvento } from './CardEvento';
 
 export { default as Carousel } from './Carousel';
+
+export { default as EventoDataDetail } from './EventoDataDetail';
+
+export { default as EventoLocalDetail } from './EventoLocalDetail';
 
 export { default as FadeIn } from './FadeIn';
 

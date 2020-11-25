@@ -9,8 +9,11 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+    "@styled-icons/boxicons-regular": "^10.18.0",
     "@styled-icons/evaicons-outline": "^10.18.0",
+    "@styled-icons/icomoon": "^10.18.0",
     "axios": "^0.21.0",
+    "dayjs": "^1.9.6",
     "framer-motion": "^2.9.4",
     "next": "10.0.1",
     "react": "17.0.1",
