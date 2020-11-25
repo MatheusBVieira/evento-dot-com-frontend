@@ -9,10 +9,17 @@ export const Container = styled.main`
   align-items: center;
 `;
 
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const FormContent = styled(Grid)`
   && {
     margin: 2rem 0;
-    padding: 2.5rem 5rem;
+    padding: 2.5rem;
     border-radius: 2rem;
     background-color: ${({ theme }) => theme.colors.backgroundSecondary};
   }

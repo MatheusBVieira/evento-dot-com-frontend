@@ -3,12 +3,13 @@ import { createMuiTheme } from '@material-ui/core/styles';
 export const theme = {
   colors: {
     background: '#262626',
-    backgroundSecondary: '#404040',
+    backgroundSecondary: '#353535',
     backgroundLight: '#FAFAFC',
     headerBackground: '#0D0D0D',
     baseText: '#404040',
     ligthText: '#fafafc',
     inputBackground: '#FAFAFC',
+    inputBackgroundDarker: '#C4C4C4',
     lineWhite: '#E6E6F0',
     complementText: '#757575',
     primary: '#18C572',

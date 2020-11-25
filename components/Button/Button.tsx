@@ -14,6 +14,7 @@ const StyledButton = styled(MaterialButton)`
 
 enum VARIANT {
   primary = 'primary',
+  secondary = 'secondary',
 }
 
 type ButtonProps = {
@@ -33,9 +34,13 @@ const Button: React.FC<ButtonProps> = ({
       buttonVariant: 'contained',
       color: 'secondary',
     },
+    secondary: {
+      buttonVariant: 'contained',
+      color: 'primary',
+    },
   };
 
-  const { color, buttonVariant } = VARIANTS[variant] as any;
+  const { color, buttonVariant }: any = VARIANTS[variant] ?? {};
 
   return (
     <StyledButton

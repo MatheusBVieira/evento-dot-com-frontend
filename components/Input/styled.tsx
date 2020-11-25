@@ -20,14 +20,21 @@ export const InputBlock = styled.div<InputBlockProps>`
   }
 `;
 
-export const InputBox = styled.div`
+type InputBoxProps = {
+  disabled?: boolean;
+};
+
+export const InputBox = styled.div<InputBoxProps>`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 4.6rem;
   border-radius: 0.8rem;
-  background-color: ${({ theme }) => theme.colors.inputBackground};
+  background-color: ${({ theme, disabled }) =>
+    disabled
+      ? theme.colors.inputBackgroundDarker
+      : theme.colors.inputBackground};
   border: 1px solid ${({ theme }) => theme.colors.lineWhite};
   padding: 0 1.6rem;
   ${({ theme }) => theme.elevation[0]};

@@ -28,6 +28,7 @@ const Input: React.FC<InputProps> = memo(
     startAdorment,
     fullWidth,
     mask,
+    disabled,
     ...rest
   }) => {
     const [value, setValue] = useState(initialValue);
@@ -59,7 +60,7 @@ const Input: React.FC<InputProps> = memo(
             {label}
           </Label>
         )}
-        <InputBox>
+        <InputBox disabled={disabled}>
           {startAdorment && <Adorment>{startAdorment}</Adorment>}
           <StyledInput
             id={name}
@@ -67,6 +68,7 @@ const Input: React.FC<InputProps> = memo(
             value={value}
             onChange={handleChange}
             required={required}
+            disabled={disabled}
             {...rest}
           />
         </InputBox>

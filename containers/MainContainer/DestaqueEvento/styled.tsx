@@ -31,6 +31,10 @@ export const DestaqueImage = styled.div`
   border-radius: 2rem;
   ${({ theme }) => theme.elevation[1]};
 
+  img {
+    object-fit: cover;
+  }
+
   @media (max-width: 960px) {
     max-height: 350px;
   }
