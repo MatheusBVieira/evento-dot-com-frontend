@@ -24,17 +24,21 @@ const EnderecoContainer = styled.div`
   svg {
     margin-right: 1rem;
   }
+
+  p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 const EventoLocalDetail: React.FC<EventoLocalDetailProps> = ({ endereco }) => {
   const { cidade, bairro, estado, numero, rua, nomeLocal } = endereco ?? {};
-
+  const textEndereco = `${nomeLocal} - ${rua}, ${numero}, ${bairro} - ${cidade} - ${estado}`;
   return (
     <EnderecoContainer>
-      <CurrentLocation width={24} height={24} />
-      <p>
-        {`${nomeLocal} - ${rua}, ${numero}, ${bairro} - ${cidade} - ${estado}`}
-      </p>
+      <CurrentLocation width={34} height={34} />
+      <p>{textEndereco}</p>
     </EnderecoContainer>
   );
 };

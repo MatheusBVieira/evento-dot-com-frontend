@@ -1,6 +1,6 @@
 import { memo, createContext, useContext } from 'react';
 import axios, { AxiosInstance } from 'axios';
-import { useAuth } from '../AuthProvider';
+import { useAuth } from './AuthProvider';
 
 const AxiosContext = createContext<any>(null);
 

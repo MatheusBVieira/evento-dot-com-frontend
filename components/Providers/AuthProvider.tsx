@@ -9,7 +9,7 @@ type AuthInstance = {
 
 export const useAuth = () => useContext<AuthInstance>(AuthContext);
 
-const AxiosProvider = memo(({ children }) => {
+const AuthProvider = memo(({ children }) => {
   const setAuthToken = (token: string) => {
     localStorage.setItem('token', token);
   };
@@ -23,4 +23,4 @@ const AxiosProvider = memo(({ children }) => {
   );
 });
 
-export default AxiosProvider;
+export default AuthProvider;

@@ -1,19 +1,23 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { Grid } from '@material-ui/core';
-import { Input, Button } from '../../components';
+import { Input, Button, useAuth, useToast } from '../../components';
 import { Container, Form, FormTitle } from './styled';
 import useMutate from '../../hooks/useMutate';
 
 const LoginContainer = () => {
+  const { setAuth } = useAuth();
+  const { back, push } = useRouter();
+  const showToast = useToast();
   const [form, setForm] = useState({});
 
   const [loginPost, { loading }] = useMutate({
     method: 'post',
     path: '/auth',
-    options: {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    onCompleted: ({ token }) => {
+      setAuth(token);
+      showToast('Logado com sucesso', { type: 'success' });
+      back();
     },
   });
 
@@ -53,13 +57,20 @@ const LoginContainer = () => {
               required
             />
           </Grid>
-          <Button
-            loading={loading}
-            buttonProps={{ type: 'submit' }}
-            variant="primary"
-          >
-            Entrar
-          </Button>
+          <Grid item xs={6}>
+            <Button loading={loading} type={'submit'} variant="primary">
+              Entrar
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => push('/criar-conta')}
+            >
+              Não tem conta? Cadastre-se
+            </Button>
+          </Grid>
         </Grid>
       </Form>
     </Container>

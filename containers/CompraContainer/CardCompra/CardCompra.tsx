@@ -7,8 +7,8 @@ const CardContainer = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
+  padding: 0 1rem;
   background-color: ${({ theme }) => theme.colors.backgroundLight};
   border-radius: 0.5rem;
   ${({ theme }) => theme.elevation[1]}
@@ -19,13 +19,14 @@ const CardContainer = styled.div`
 `;
 
 const Title = styled.p`
+  margin: 0 1rem;
   color: ${({ theme }) => theme.colors.primary};
   font: ${({ theme }) => theme.fonts.titleLarge};
 `;
 
 const Price = styled.p`
   margin: 1rem;
-  font: ${({ theme }) => theme.fonts.regularSemiBold};
+  font: ${({ theme }) => theme.fonts.title};
 `;
 
 const CompraContainer = ({ nome, dataEvento, endereco, preco }) => {

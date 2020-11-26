@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { Grid } from '@material-ui/core';
-import { Input, Button } from '../../components';
+import { Input, Button, useToast } from '../../components';
 import { Container, Form, FormTitle } from './styled';
 import useMutate from '../../hooks/useMutate';
 
@@ -15,9 +16,15 @@ type Conta = {
 
 type ContaContainerProps = {
   conta?: Conta;
+  isEditing?: boolean;
 };
 
-const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
+const ContaContainer: React.FC<ContaContainerProps> = ({
+  conta,
+  isEditing,
+}) => {
+  const showToast = useToast();
+  const { push } = useRouter();
   const [form, setForm] = useState<Conta>(conta);
 
   const handleFormChange = ({ value, name }) => {
@@ -27,6 +34,14 @@ const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
   const [createUsuario, { loading }] = useMutate({
     method: 'post',
     path: '/usuario',
+    onCompleted: ({ id } = {}) => {
+      if (id) {
+        showToast(isEditing ? 'Dados atualizados' : 'Conta criada', {
+          type: 'success',
+        });
+        push('/conta');
+      }
+    },
   });
 
   const handleSubmit = (e) => {
@@ -43,7 +58,7 @@ const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
     <Container>
       <Form onSubmit={handleSubmit}>
         <Grid container spacing={3} justify="center" alignItems="center">
-          <FormTitle>Criar conta</FormTitle>
+          <FormTitle>{isEditing ? 'Sua conta' : 'Criar conta'}</FormTitle>
 
           <Grid item xs={12}>
             <Input
@@ -111,9 +126,11 @@ const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
               required
             />
           </Grid>
-          <Button type="submit" variant="primary" loading={loading}>
-            Cadastrar
-          </Button>
+          <Grid item xs={12} style={{ display: 'flex' }} justify="center">
+            <Button type="submit" variant="primary" loading={loading}>
+              {isEditing ? 'Atualizar dados' : 'Cadastrar'}
+            </Button>
+          </Grid>
         </Grid>
       </Form>
     </Container>

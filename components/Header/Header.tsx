@@ -11,6 +11,7 @@ import {
   StyledDrawer,
   IconButton,
 } from './styled';
+import { useAuth } from '..';
 
 const routes = [
   {
@@ -29,10 +30,12 @@ const routes = [
     name: 'Cadastre-se',
     route: '/criar-conta',
     buttonProps: { border: true },
+    hideOnAuth: true,
   },
 ];
 
 const Header = () => {
+  const { token } = useAuth();
   const router = useRouter();
   const [showSideBar, setShowSideBar] = useState(false);
 
@@ -46,6 +49,20 @@ const Header = () => {
     }
   };
 
+  const handleRoutes = () =>
+    routes.map(({ route, name, buttonProps, hideOnAuth }) =>
+      hideOnAuth && !!token ? null : (
+        <RouteText
+          key={name}
+          {...buttonProps}
+          onClick={() => handleRoute(route)}
+          onKeyDown={(e) => handleKeydown(e, route)}
+        >
+          {name}
+        </RouteText>
+      )
+    );
+
   return (
     <>
       <HeaderContainer>
@@ -55,32 +72,13 @@ const Header = () => {
         >
           Evento.com
         </Title>
-        <HeaderRoutes>
-          {routes.map(({ route, name, buttonProps }) => (
-            <RouteText
-              key={name}
-              onClick={() => handleRoute(route)}
-              onKeyDown={(e) => handleKeydown(e, route)}
-              {...buttonProps}
-            >
-              {name}
-            </RouteText>
-          ))}
-        </HeaderRoutes>
+        <HeaderRoutes>{handleRoutes()}</HeaderRoutes>
         <IconButton onClick={() => setShowSideBar(true)}>
           <MenuOutline />
         </IconButton>
       </HeaderContainer>
       <StyledDrawer open={showSideBar} onClose={() => setShowSideBar(false)}>
-        {routes.map(({ route, name, buttonProps }) => (
-          <RouteText
-            {...buttonProps}
-            onClick={() => handleRoute(route)}
-            onKeyDown={(e) => handleKeydown(e, route)}
-          >
-            {name}
-          </RouteText>
-        ))}
+        {handleRoutes()}
       </StyledDrawer>
     </>
   );

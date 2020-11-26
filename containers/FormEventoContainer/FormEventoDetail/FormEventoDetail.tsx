@@ -2,6 +2,7 @@ import { memo, useEffect, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { Input, Select, Textarea } from '../../../components';
 import { WarningText } from './styled';
+import { toCurrency } from '../../../utils/toCurrency';
 
 export type EventoDetail = {
   valor_ingresso?: string;
@@ -35,9 +36,9 @@ const FormEventoDetail: React.FC<FormEventoDetailProps> = memo(
           <Input
             label="Valor por ingresso"
             name="valor_ingresso"
-            type="number"
             placeholder="R$ 10,00"
             onChange={handleFormChange}
+            formater={(v) => toCurrency(v)}
             required
           />
         </Grid>

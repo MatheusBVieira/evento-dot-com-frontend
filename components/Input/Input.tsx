@@ -12,6 +12,7 @@ type Props = {
   startAdorment?: ReactNode;
   fullWidth?: boolean;
   mask?: string;
+  formater?: (value: any) => any;
 };
 
 type InputProps = Props &
@@ -28,6 +29,7 @@ const Input: React.FC<InputProps> = memo(
     startAdorment,
     fullWidth,
     mask,
+    formater,
     disabled,
     ...rest
   }) => {
@@ -41,12 +43,15 @@ const Input: React.FC<InputProps> = memo(
       let inputValue = value,
         newValue = value;
 
-      if (type === 'number') {
-        inputValue = value.replace(/\D/g, '');
-        newValue = parseNumber(inputValue);
-      } else if (mask) {
+      if (mask) {
         newValue = parseNumber(value.replace(/\D/g, ''));
         inputValue = stringFormat(mask, newValue);
+      } else if (formater) {
+        newValue = parseNumber(value.replace(/\D/g, ''));
+        inputValue = formater(newValue);
+      } else if (type === 'number') {
+        inputValue = value.replace(/\D/g, '');
+        newValue = parseNumber(inputValue);
       }
 
       setValue(inputValue ?? '');
