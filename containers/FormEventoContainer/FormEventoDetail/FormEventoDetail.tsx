@@ -2,11 +2,10 @@ import { memo, useEffect, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { Input, Select, Textarea } from '../../../components';
 import { WarningText } from './styled';
-import { toCurrency } from '../../../utils/toCurrency';
 
 export type EventoDetail = {
-  valor_ingresso?: string;
-  capacidade_max?: string;
+  preco?: number;
+  capacidadePessoas?: string;
   categoria?: string;
   descricao?: string;
 };
@@ -18,7 +17,7 @@ type FormEventoDetailProps = {
 
 const FormEventoDetail: React.FC<FormEventoDetailProps> = memo(
   ({ value, onChange }) => {
-    const [detail, setDetail] = useState<EventoDetail>({});
+    const [detail, setDetail] = useState<EventoDetail>(value);
 
     const handleFormChange = ({ value, name }) => {
       setDetail((prev) => ({ ...prev, [name]: value }));
@@ -26,7 +25,7 @@ const FormEventoDetail: React.FC<FormEventoDetailProps> = memo(
 
     useEffect(() => {
       if (detail) {
-        onChange({ value: detail, name: 'detalhe' });
+        onChange({ value: detail, name: 'detail' });
       }
     }, [detail]);
 
@@ -35,17 +34,16 @@ const FormEventoDetail: React.FC<FormEventoDetailProps> = memo(
         <Grid item lg={2} md={4} sm={6} xs={12}>
           <Input
             label="Valor por ingresso"
-            name="valor_ingresso"
-            placeholder="R$ 10,00"
+            name="preco"
+            type="money"
             onChange={handleFormChange}
-            formater={(v) => toCurrency(v)}
             required
           />
         </Grid>
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <Input
             label="Capacidade maxíma local"
-            name="capacidade_max"
+            name="capacidadePessoas"
             placeholder="Digite a capacidade max."
             type="number"
             onChange={handleFormChange}
@@ -55,7 +53,7 @@ const FormEventoDetail: React.FC<FormEventoDetailProps> = memo(
         <Grid item lg={2} md={4} sm={6} xs={12}>
           <Input
             label="Ingressos"
-            value={(0.4 * Number(detail.capacidade_max ?? '')).toFixed(0)}
+            value={(0.4 * Number(detail?.capacidadePessoas ?? '')).toFixed(0)}
             disabled
             required
           />

@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core';
 import { Input } from '../../../components';
 
 export type Endereco = {
-  nome_local?: string;
+  nomeLocal?: string;
   rua?: string;
   numero?: string;
   complemento?: string;
@@ -19,7 +19,7 @@ type FormEnderecoProps = {
 
 const FormEndereco: React.FC<FormEnderecoProps> = memo(
   ({ value, onChange }) => {
-    const [endereco, setEndereco] = useState<Endereco>({});
+    const [endereco, setEndereco] = useState<Endereco>(value);
 
     const handleFormChange = ({ value, name }) => {
       setEndereco((prev) => ({ ...prev, [name]: value }));
@@ -34,12 +34,18 @@ const FormEndereco: React.FC<FormEnderecoProps> = memo(
     return (
       <>
         <Grid item lg={2} md={4} sm={4} xs={12}>
-          <Input label="CEP" name="cep" onChange={handleFormChange} required />
+          <Input
+            label="CEP"
+            name="cep"
+            mask="#####-###"
+            onChange={handleFormChange}
+            required
+          />
         </Grid>
         <Grid item lg={10} md={8} sm={8} xs={12}>
           <Input
             label="Nome do local"
-            name="nome_local"
+            name="nomeLocal"
             onChange={handleFormChange}
             required
           />
@@ -52,6 +58,7 @@ const FormEndereco: React.FC<FormEnderecoProps> = memo(
           <Input
             label="Número"
             name="numero"
+            type="number"
             onChange={handleFormChange}
             required
           />

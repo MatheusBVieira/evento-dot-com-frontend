@@ -4,3 +4,8 @@ export const toCurrency = (number: number) =>
     currency: 'BRL',
     minimumFractionDigits: 2,
   });
+
+export const currencyToFloat = (number: string) => {
+  let value = Number(number.replace(/\D/g, ''));
+  return parseFloat((value / 100).toFixed(2));
+};

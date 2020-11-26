@@ -3,36 +3,39 @@ import { useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { Button } from '../../components';
 
-import FormName, { EventoName } from './FormName';
+import FormName from './FormName';
 import FormEventoDetail, { EventoDetail } from './FormEventoDetail';
 import FormEndereco, { Endereco } from './FormEndereco';
-import FormTime, { Time } from './FormTime';
+import FormTime, { DataEvento } from './FormTime';
 
 import { Container, Form, FormTitle, FormContent } from './styled';
 import useMutate from '../../hooks/useMutate';
 
 type FormEvento = {
-  eventoName?: EventoName;
+  name?: string;
   detail?: EventoDetail;
   endereco?: Endereco;
-  time?: Time;
+  dataEvento?: DataEvento;
 };
 
-const FormEvento = () => {
-  const [form, setForm] = useState<FormEvento>({});
+const FormEvento = ({ evento }) => {
+  const [form, setForm] = useState<FormEvento>(evento);
 
   const [insertEvento, { loading }] = useMutate({
     method: 'post',
     path: '/evento',
+    onCompleted: console.log,
   });
 
   const handleFormChange = ({ value, name }) => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  console.log(form);
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { dataEvento, endereco, detail, ...rest } = form;
+    const input = { dataEvento, endereco, ...detail, ...rest };
+    insertEvento(input);
   };
 
   return (
@@ -42,7 +45,7 @@ const FormEvento = () => {
           <Grid item xs={12}>
             <FormTitle>1. Qual é nome do evento?</FormTitle>
           </Grid>
-          <FormName value={form.eventoName} onChange={handleFormChange} />
+          <FormName value={form.name} onChange={handleFormChange} />
         </FormContent>
 
         <FormContent container spacing={4}>
@@ -63,12 +66,23 @@ const FormEvento = () => {
           <Grid item xs={12}>
             <FormTitle>4. Quando vai acontecer?</FormTitle>
           </Grid>
-          <FormTime value={form.time} onChange={handleFormChange} />
+          <FormTime value={form.dataEvento} onChange={handleFormChange} />
         </FormContent>
-        <Button variant="secondary">Publicar evento</Button>
+        <Button type="submit" variant="secondary" loading={loading}>
+          Publicar evento
+        </Button>
       </Form>
     </Container>
   );
+};
+
+FormEvento.defaultProps = {
+  evento: {
+    name: '',
+    detail: {},
+    endereco: {},
+    dataEvento: {},
+  },
 };
 
 export default FormEvento;

@@ -3,6 +3,7 @@ import { memo, ReactNode, useState } from 'react';
 import Label from '../Label';
 import { InputBlock, InputBox, StyledInput, Adorment } from './styled';
 import stringFormat from '../../utils/stringFormat';
+import { currencyToFloat, toCurrency } from '../../utils/toCurrency';
 
 type Props = {
   label?: string;
@@ -31,6 +32,7 @@ const Input: React.FC<InputProps> = memo(
     mask,
     formater,
     disabled,
+    type,
     ...rest
   }) => {
     const [value, setValue] = useState(initialValue);
@@ -39,16 +41,17 @@ const Input: React.FC<InputProps> = memo(
       value === '' ? undefined : Number(value);
 
     const handleChange = (event) => {
-      const { value, type } = event.target;
+      const { value } = event.target;
       let inputValue = value,
         newValue = value;
 
       if (mask) {
         newValue = parseNumber(value.replace(/\D/g, ''));
         inputValue = stringFormat(mask, newValue);
-      } else if (formater) {
-        newValue = parseNumber(value.replace(/\D/g, ''));
-        inputValue = formater(newValue);
+      } else if (type === 'money') {
+        newValue = currencyToFloat(value);
+        inputValue = toCurrency(newValue);
+        console.log(inputValue);
       } else if (type === 'number') {
         inputValue = value.replace(/\D/g, '');
         newValue = parseNumber(inputValue);
@@ -74,6 +77,7 @@ const Input: React.FC<InputProps> = memo(
             onChange={handleChange}
             required={required}
             disabled={disabled}
+            type={type}
             {...rest}
           />
         </InputBox>
