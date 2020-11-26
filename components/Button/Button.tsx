@@ -22,6 +22,7 @@ type ButtonProps = {
   variant?: keyof typeof VARIANT;
   onClick?: MaterialButtonProps['onClick'];
   buttonProps?: Omit<MaterialButtonProps, keyof 'color'>;
+  type?: MaterialButtonProps['type'];
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -30,6 +31,7 @@ const Button: React.FC<ButtonProps> = ({
   loading,
   buttonProps,
   onClick,
+  type,
 }) => {
   const VARIANTS = {
     primary: {
@@ -50,6 +52,7 @@ const Button: React.FC<ButtonProps> = ({
       variant={buttonVariant}
       disabled={loading}
       onClick={onClick}
+      type={type}
       {...buttonProps}
     >
       {children}

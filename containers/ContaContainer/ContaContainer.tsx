@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Grid } from '@material-ui/core';
-import { Input } from '../../components';
-import { Container, Form, FormTitle, SubmitButton } from './styled';
+import { Input, Button } from '../../components';
+import { Container, Form, FormTitle } from './styled';
+import useMutate from '../../hooks/useMutate';
 
 type Conta = {
   email?: string;
@@ -23,9 +24,19 @@ const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  const [createUsuario, { loading }] = useMutate({
+    method: 'post',
+    path: '/usuario',
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    const { telefone, cpf } = form;
+    createUsuario({
+      ...form,
+      telefone: String(telefone),
+      cpf: String(cpf),
+    });
   };
 
   return (
@@ -100,9 +111,9 @@ const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
               required
             />
           </Grid>
-          <SubmitButton type="submit" variant="contained" color="secondary">
+          <Button type="submit" variant="primary" loading={loading}>
             Cadastrar
-          </SubmitButton>
+          </Button>
         </Grid>
       </Form>
     </Container>

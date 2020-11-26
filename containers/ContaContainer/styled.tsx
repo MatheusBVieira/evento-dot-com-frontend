@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { Button } from '@material-ui/core';
-
 export const Container = styled.main`
   max-width: 640px;
   margin: 2rem auto;
@@ -24,12 +22,4 @@ export const Form = styled.form`
 export const FormTitle = styled.p`
   font: ${({ theme }) => theme.fonts.title};
   color: ${({ theme }) => theme.colors.ligthText};
-`;
-
-export const SubmitButton = styled(Button)`
-  && {
-    margin-top: 2rem;
-    height: 4.6rem;
-    font: ${({ theme }) => theme.fonts.regular};
-  }
 `;
