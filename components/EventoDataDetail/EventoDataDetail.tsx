@@ -3,14 +3,12 @@ import { CalendarOutline } from '@styled-icons/evaicons-outline';
 import styled from 'styled-components';
 
 type DataEvento = {
-  horarioInicio: string;
-  horarioFim: string;
-  dataInicio: Date;
-  dataFim: Date;
+  dataHoraFim: Date;
+  dataHoraInicio: Date;
 };
 
 type EventoDataDetailProps = {
-  dataEvento: DataEvento;
+  dataEvento?: DataEvento;
 };
 
 const DataContainer = styled.div`
@@ -24,11 +22,11 @@ const DataContainer = styled.div`
 `;
 
 const EventoDataDetail: React.FC<EventoDataDetailProps> = ({ dataEvento }) => {
-  const { dataInicio, dataFim, horarioFim, horarioInicio } = dataEvento ?? {};
+  const { dataHoraFim, dataHoraInicio } = dataEvento ?? {};
   return (
     <DataContainer>
       <CalendarOutline width={24} height={24} />
-      {`${dataInicio} as ${horarioInicio} até ${dataFim} as ${horarioFim}`}
+      <p>{`${dataHoraInicio} até ${dataHoraFim}`}</p>
     </DataContainer>
   );
 };

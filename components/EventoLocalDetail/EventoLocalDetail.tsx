@@ -32,7 +32,9 @@ const EventoLocalDetail: React.FC<EventoLocalDetailProps> = ({ endereco }) => {
   return (
     <EnderecoContainer>
       <CurrentLocation width={24} height={24} />
-      {`${nomeLocal} - ${rua}, ${numero}, ${bairro} - ${cidade} - ${estado}`}
+      <p>
+        {`${nomeLocal} - ${rua}, ${numero}, ${bairro} - ${cidade} - ${estado}`}
+      </p>
     </EnderecoContainer>
   );
 };

@@ -27,7 +27,7 @@ const CardEvento: React.FC<CardEvento> = ({ nome, descricao, preco, id }) => {
     <Card image="/evento.jpg">
       <EventoHeader>
         <EventoNome>{nome}</EventoNome>
-        <EventoPreco>{toCurrency(preco)}</EventoPreco>
+        <EventoPreco>{toCurrency(preco || 0)}</EventoPreco>
       </EventoHeader>
       <EventoDescricao>{descricao}</EventoDescricao>
       <StyledButton
