@@ -1,6 +1,5 @@
-import { memo, createContext, useContext } from 'react';
+import { memo, createContext, useContext, useMemo } from 'react';
 import axios, { AxiosInstance } from 'axios';
-import { useAuth } from './AuthProvider';
 
 const AxiosContext = createContext<any>(null);
 
@@ -12,7 +11,8 @@ type AxiosProviderProps = {
 
 const AxiosProvider: React.FC<AxiosProviderProps> = memo(
   ({ children, url }) => {
-    const { token } = useAuth();
+    const token =
+      typeof window !== 'undefined' && localStorage.getItem('token');
 
     const instance = axios.create({
       baseURL: url,

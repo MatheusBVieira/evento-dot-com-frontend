@@ -13,18 +13,25 @@ type MutateParams = {
   method: keyof typeof METHODS;
   options?: Omit<AxiosRequestConfig, 'params'>;
   onCompleted?: (data: any) => void;
+  toast?: boolean;
 };
-
-type Mutate = (variables: any) => void;
 
 type MutateResult = {
   data: any;
   loading: boolean;
 };
 
+type Mutate = (variables: any) => Promise<{ data: any; e: Error }>;
+
 type IUseMutate = (params: MutateParams) => [Mutate, MutateResult];
 
-const useMutate: IUseMutate = ({ method, path, options, onCompleted }) => {
+const useMutate: IUseMutate = ({
+  method,
+  path,
+  options,
+  onCompleted,
+  toast = true,
+}) => {
   const showToast = useToast();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<any>();
@@ -32,9 +39,10 @@ const useMutate: IUseMutate = ({ method, path, options, onCompleted }) => {
   const api = useAxios();
   const action = api[method] as any;
 
-  const mutate = (variables: any) => {
+  const mutate = async (variables: any) => {
     setLoading(true);
-    action(path, variables, {
+
+    const response = await action(path, variables, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -44,8 +52,10 @@ const useMutate: IUseMutate = ({ method, path, options, onCompleted }) => {
         setData(data);
         onCompleted(data);
       })
-      .catch((e: Error) => showToast(e.message, { type: 'error' }))
+      .catch((e: Error) => toast && showToast(e.message, { type: 'error' }))
       .finally(() => setLoading(false));
+
+    return response;
   };
 
   return [mutate, { loading, data }];

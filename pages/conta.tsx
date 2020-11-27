@@ -5,9 +5,11 @@ import PageContainer from '../containers/PageContainer';
 import LoginContainer from '../containers/LoginContainer';
 import ContaContainer from '../containers/ContaContainer';
 import { useAuth } from '../components';
+import { useEffect } from 'react';
 
 const Conta = () => {
   const { token } = useAuth();
+
   return (
     <>
       <Head>

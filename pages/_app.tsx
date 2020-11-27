@@ -3,8 +3,14 @@ import { AppProps } from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { ThemeProvider as MaterialThemeProvider } from '@material-ui/core';
 import { AnimatePresence } from 'framer-motion';
-import { ToastProvider, AxiosProvider, AuthProvider } from '../components';
+import {
+  ToastProvider,
+  AxiosProvider,
+  AuthProvider,
+  useAuth,
+} from '../components';
 import { theme, materialTheme } from '../styles/theme';
+import { useEffect } from 'react';
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -56,23 +62,34 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-const App = ({ Component, pageProps }: AppProps) => {
+const AuthMiddleware = ({ route }) => {
+  const { validateToken } = useAuth();
+  useEffect(() => {
+    if (route) {
+      validateToken();
+    }
+  }, [route]);
+  return null;
+};
+
+const AppContainer = ({ Component, pageProps, router }: AppProps) => {
   return (
-    <AnimatePresence exitBeforeEnter>
-      <ThemeProvider theme={theme}>
-        <MaterialThemeProvider theme={materialTheme}>
-          <GlobalStyles />
-          <ToastProvider>
-            <AuthProvider>
-              <AxiosProvider url={process.env.NEXT_PUBLIC_SERVER_URL}>
+    <AxiosProvider url={process.env.NEXT_PUBLIC_SERVER_URL}>
+      <AuthProvider>
+        <AnimatePresence exitBeforeEnter>
+          <ThemeProvider theme={theme}>
+            <MaterialThemeProvider theme={materialTheme}>
+              <GlobalStyles />
+              <ToastProvider>
                 <Component {...pageProps} />
-              </AxiosProvider>
-            </AuthProvider>
-          </ToastProvider>
-        </MaterialThemeProvider>
-      </ThemeProvider>
-    </AnimatePresence>
+                <AuthMiddleware route={router.route} />
+              </ToastProvider>
+            </MaterialThemeProvider>
+          </ThemeProvider>
+        </AnimatePresence>
+      </AuthProvider>
+    </AxiosProvider>
   );
 };
 
-export default App;
+export default AppContainer;

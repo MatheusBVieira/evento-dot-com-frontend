@@ -3,31 +3,25 @@ import { useRouter } from 'next/router';
 import { Grid } from '@material-ui/core';
 import { Input, Button, useAuth, useToast } from '../../components';
 import { Container, Form, FormTitle } from './styled';
-import useMutate from '../../hooks/useMutate';
 
 const LoginContainer = () => {
-  const { setAuth } = useAuth();
-  const { back, push } = useRouter();
+  const { logIn } = useAuth();
+  const { push } = useRouter();
   const showToast = useToast();
   const [form, setForm] = useState({});
-
-  const [loginPost, { loading }] = useMutate({
-    method: 'post',
-    path: '/auth',
-    onCompleted: ({ token }) => {
-      setAuth(token);
-      showToast('Logado com sucesso', { type: 'success' });
-      back();
-    },
-  });
-
+  const [loading, setLoading] = useState(false);
   const handleFormChange = ({ value, name }) => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    loginPost(form);
+    setLoading(true);
+
+    logIn(form, (login) => {
+      setLoading(false);
+      login && showToast('Logado com sucesso', { type: 'success' });
+    });
   };
 
   return (

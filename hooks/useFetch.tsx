@@ -43,10 +43,10 @@ const useFetch = ({ method, path, skip, options, variables }: FetchParams) => {
 
   const fetchMore = (
     fetchMoreOptions: any,
-    updateDate: (prev: any, data: any) => any
+    updateData: (prev: any, data: any) => any
   ) => {
     handleRequest(fetchMoreOptions, ({ data }) => {
-      setData((prev: any) => updateDate(prev, data));
+      setData((prev: any) => updateData(prev, data));
     });
   };
 
