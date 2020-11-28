@@ -1,10 +1,21 @@
 import Head from 'next/head';
 
-import { FadeIn } from '../components';
+import { FadeIn, useAuth } from '../components';
 import PageContainer from '../containers/PageContainer';
 import ContaContainer from '../containers/ContaContainer';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const CriarConta = () => {
+  const { token } = useAuth();
+  const { push } = useRouter();
+
+  useEffect(() => {
+    if (token) {
+      push('/conta');
+    }
+  }, [token]);
+
   return (
     <>
       <Head>

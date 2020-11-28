@@ -7,6 +7,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { useToast } from '../Toast';
 import { useAxios } from './AxiosProvider';
 
 const AuthContext = createContext<any>(null);
@@ -29,6 +30,7 @@ export const useAuth = () => useContext<AuthInstance>(AuthContext);
 
 const AuthProvider = memo(({ children }) => {
   const api = useAxios();
+  const showToast = useToast();
   const { back, reload } = useRouter();
   const [validated, setValidated] = useState(false);
 
@@ -36,7 +38,11 @@ const AuthProvider = memo(({ children }) => {
     typeof window !== 'undefined' && localStorage.getItem('token');
 
   const logIn = async (user: User, onFinish?: (isLoged: boolean) => void) => {
-    const { data: { token } = {} } = await api.post('/auth', user);
+    const response = await api
+      .post('/auth', user)
+      .catch(() => showToast('Senha ou email incorreto', { type: 'error' }));
+
+    const { data: { token = null } = {} } = response || {};
 
     onFinish && onFinish(!!token);
 

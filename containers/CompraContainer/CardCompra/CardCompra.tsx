@@ -34,7 +34,7 @@ const CompraContainer = ({ nome, dataEvento, endereco, preco }) => {
     <CardContainer>
       <Title>{nome}</Title>
       <EventoDataDetail dataEvento={dataEvento} />
-      <EventoLocalDetail endereco={endereco} />
+      <EventoLocalDetail endereco={endereco} nowWrap />
       <Price>{toCurrency(preco || 0)}</Price>
     </CardContainer>
   );

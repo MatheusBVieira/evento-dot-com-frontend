@@ -2,11 +2,12 @@ import { memo, useEffect, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { Input, Select, Textarea } from '../../../components';
 import { WarningText } from './styled';
+import useFetch from '../../../hooks/useFetch';
 
 export type EventoDetail = {
   preco?: number;
   capacidadePessoas?: string;
-  categoria?: string;
+  categoria?: number;
   descricao?: string;
 };
 
@@ -18,6 +19,11 @@ type FormEventoDetailProps = {
 const FormEventoDetail: React.FC<FormEventoDetailProps> = memo(
   ({ value, onChange }) => {
     const [detail, setDetail] = useState<EventoDetail>(value);
+
+    const { data: { content = [] } = {} } = useFetch({
+      method: 'get',
+      path: '/categoria',
+    });
 
     const handleFormChange = ({ value, name }) => {
       setDetail((prev) => ({ ...prev, [name]: value }));
@@ -36,6 +42,8 @@ const FormEventoDetail: React.FC<FormEventoDetailProps> = memo(
             label="Valor por ingresso"
             name="preco"
             type="money"
+            placeholder="Digite o valor"
+            defaultValue={detail.preco}
             onChange={handleFormChange}
             required
           />
@@ -46,6 +54,7 @@ const FormEventoDetail: React.FC<FormEventoDetailProps> = memo(
             name="capacidadePessoas"
             placeholder="Digite a capacidade max."
             type="number"
+            defaultValue={detail.capacidadePessoas}
             onChange={handleFormChange}
             required
           />
@@ -76,12 +85,7 @@ const FormEventoDetail: React.FC<FormEventoDetailProps> = memo(
           <Select
             label="Categoria"
             name="categoria"
-            options={[
-              { label: 'Categoria', value: 1 },
-              { label: 'Categoria2', value: 2 },
-              { label: 'Categoria3', value: 3 },
-              { label: 'Categoria4', value: 4 },
-            ]}
+            options={content.map((c) => ({ value: c.id, label: c.descricao }))}
             onChange={handleFormChange}
             required
           />
@@ -90,6 +94,7 @@ const FormEventoDetail: React.FC<FormEventoDetailProps> = memo(
           <Textarea
             label="Descrição"
             name="descricao"
+            defaultValue={detail.descricao}
             onChange={handleFormChange}
             placeholder="Descreva como vai ser seu evento"
             required

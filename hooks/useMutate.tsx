@@ -50,7 +50,7 @@ const useMutate: IUseMutate = ({
     })
       .then(({ data }) => {
         setData(data);
-        onCompleted(data);
+        onCompleted && onCompleted(data);
       })
       .catch((e: Error) => toast && showToast(e.message, { type: 'error' }))
       .finally(() => setLoading(false));

@@ -14,7 +14,7 @@ const CriarEvento = () => {
 
   useEffect(() => {
     if (!token) {
-      showToast('Você precisa estar logado para cadastrar um evento', {
+      showToast('Você precisa estar logado para organizar um evento', {
         type: 'info',
       });
       push('/conta');

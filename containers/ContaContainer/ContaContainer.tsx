@@ -65,7 +65,7 @@ const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
               defaultValue={form.email}
               name="email"
               type="email"
-              placeholder="email@mail.com"
+              placeholder="Digite seu email"
               onChange={handleFormChange}
               required={!isEditing}
             />
@@ -75,7 +75,7 @@ const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
               label="Nome"
               name="nome"
               defaultValue={form.nome}
-              placeholder="Nome..."
+              placeholder="Digite seu nome"
               autoComplete="cc-name"
               onChange={handleFormChange}
               required={!isEditing}
@@ -84,7 +84,7 @@ const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
           <Grid item xs={12}>
             <Input
               label="Sobrenome"
-              placeholder="Sobrenome..."
+              placeholder="Digite seu sobrenome"
               name="sobrenome"
               defaultValue={form.sobrenome}
               onChange={handleFormChange}
@@ -94,7 +94,7 @@ const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
           <Grid item xs={12}>
             <Input
               label={isEditing ? 'Nova senha' : 'Senha'}
-              placeholder="************"
+              placeholder="Digite sua senha"
               name="senha"
               type="password"
               defaultValue={form.senha}
@@ -107,7 +107,7 @@ const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
               label="CPF"
               name="cpf"
               defaultValue={form.cpf}
-              placeholder="000-000-000-00"
+              placeholder="Digite seu cpf"
               mask="###-###-###-##"
               onChange={handleFormChange}
               required={!isEditing}
@@ -119,7 +119,7 @@ const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
               name="telefone"
               type="tel"
               defaultValue={form.telefone}
-              placeholder="(00) 00000-0000"
+              placeholder="Digite seu telefone"
               mask="(##) #####-####"
               onChange={handleFormChange}
               required={!isEditing}

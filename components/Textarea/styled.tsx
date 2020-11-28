@@ -27,6 +27,11 @@ export const StyledTextarea = styled.textarea`
   outline: 0;
   resize: vertical;
   padding: 1.2rem 1.6rem;
-  font: ${({ theme }) => theme.fonts.regular};
+  font: ${({ theme }) => theme.fonts.regularSemiBold};
   ${({ theme }) => theme.elevation[0]};
+
+  ::placeholder {
+    font: ${({ theme }) => theme.fonts.regular};
+    color: ${({ theme }) => theme.colors.complementText};
+  }
 `;

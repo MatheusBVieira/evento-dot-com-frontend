@@ -45,9 +45,10 @@ export const StyledInput = styled.input`
   background-color: transparent;
   border: none;
   outline: 0;
-  font: ${({ theme }) => theme.fonts.regular};
+  font: ${({ theme }) => theme.fonts.regularSemiBold};
 
   ::placeholder {
+    font: ${({ theme }) => theme.fonts.regular};
     color: ${({ theme }) => theme.colors.complementText};
   }
 

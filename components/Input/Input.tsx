@@ -35,7 +35,7 @@ const Input: React.FC<InputProps> = memo(
     type,
     ...rest
   }) => {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState('');
 
     const formatInputValue = (value) => {
       let maskedValue = value,

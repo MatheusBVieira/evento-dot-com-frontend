@@ -1,8 +1,10 @@
 import { useState } from 'react';
 
+import dayjs from 'dayjs';
+import { useRouter } from 'next/router';
 import { Grid } from '@material-ui/core';
-import { Button } from '../../components';
 
+import { Button, useToast } from '../../components';
 import FormName from './FormName';
 import FormEventoDetail, { EventoDetail } from './FormEventoDetail';
 import FormEndereco, { Endereco } from './FormEndereco';
@@ -12,19 +14,24 @@ import { Container, Form, FormTitle, FormContent } from './styled';
 import useMutate from '../../hooks/useMutate';
 
 type FormEvento = {
-  name?: string;
+  nome?: string;
   detail?: EventoDetail;
   endereco?: Endereco;
   dataEvento?: DataEvento;
 };
 
 const FormEvento = ({ evento }) => {
+  const showToast = useToast();
+  const { push } = useRouter();
   const [form, setForm] = useState<FormEvento>(evento);
 
   const [insertEvento, { loading }] = useMutate({
     method: 'post',
     path: '/evento',
-    onCompleted: console.log,
+    onCompleted: () => {
+      showToast('Evento criado com sucesso', { type: 'success' });
+      push('/eventos');
+    },
   });
 
   const handleFormChange = ({ value, name }) => {
@@ -33,8 +40,17 @@ const FormEvento = ({ evento }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { dataEvento, endereco, detail, ...rest } = form;
-    const input = { dataEvento, endereco, ...detail, ...rest };
+    const { dataEvento = {}, endereco = {}, detail = {}, nome } = form;
+    const { dataHoraFim, dataHoraInicio } = dataEvento;
+    const input = {
+      dataEvento: {
+        dataHoraFim: dayjs(dataHoraFim).format('DD/MM/YYYY HH:mm'),
+        dataHoraInicio: dayjs(dataHoraInicio).format('DD/MM/YYYY HH:mm'),
+      },
+      endereco,
+      ...detail,
+      nome,
+    };
     insertEvento(input);
   };
 
@@ -45,7 +61,7 @@ const FormEvento = ({ evento }) => {
           <Grid item xs={12}>
             <FormTitle>1. Qual é nome do evento?</FormTitle>
           </Grid>
-          <FormName value={form.name} onChange={handleFormChange} />
+          <FormName value={form.nome} onChange={handleFormChange} />
         </FormContent>
 
         <FormContent container spacing={4}>
@@ -78,7 +94,7 @@ const FormEvento = ({ evento }) => {
 
 FormEvento.defaultProps = {
   evento: {
-    name: '',
+    nome: '',
     detail: {},
     endereco: {},
     dataEvento: {},

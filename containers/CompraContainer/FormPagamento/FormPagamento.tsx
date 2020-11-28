@@ -13,6 +13,8 @@ const FormPagamento: React.FC<FormTimeProps> = memo(({ onChange }) => {
         <Input
           label="Número do cartão"
           name="numeroCartao"
+          placeholder="Digite o número do cartão"
+          mask="#### #### #### ####"
           onChange={onChange}
           required
         />
@@ -22,6 +24,7 @@ const FormPagamento: React.FC<FormTimeProps> = memo(({ onChange }) => {
           label="Data expiração"
           name="dataExpiracao"
           type="date"
+          placeholder="Digite a data da expiração"
           onChange={onChange}
           required
         />
@@ -36,14 +39,22 @@ const FormPagamento: React.FC<FormTimeProps> = memo(({ onChange }) => {
       </Grid>
       <Grid item lg={9} md={8} sm={7} xs={12}>
         <Input
-          label="Nome (impresso no cartão)"
+          label="Nome"
           name="nomeCartao"
+          placeholder="Digite o nome impresso no cartão"
           onChange={onChange}
           required
         />
       </Grid>
       <Grid item lg={6} md={9} sm={8} xs={12}>
-        <Input label="CPF" name="cpf" onChange={onChange} required />
+        <Input
+          label="CPF"
+          name="cpf"
+          placeholder="Digite o cpf"
+          mask="###-###-###-##"
+          onChange={onChange}
+          required
+        />
       </Grid>
       <Grid item lg={3} md={3} sm={4} xs={12}>
         <Input

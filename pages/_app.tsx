@@ -74,21 +74,21 @@ const AuthMiddleware = ({ route }) => {
 
 const AppContainer = ({ Component, pageProps, router }: AppProps) => {
   return (
-    <AxiosProvider url={process.env.NEXT_PUBLIC_SERVER_URL}>
-      <AuthProvider>
-        <AnimatePresence exitBeforeEnter>
-          <ThemeProvider theme={theme}>
-            <MaterialThemeProvider theme={materialTheme}>
-              <GlobalStyles />
-              <ToastProvider>
+    <ThemeProvider theme={theme}>
+      <ToastProvider>
+        <AxiosProvider url={process.env.NEXT_PUBLIC_SERVER_URL}>
+          <AuthProvider>
+            <AnimatePresence exitBeforeEnter>
+              <MaterialThemeProvider theme={materialTheme}>
+                <GlobalStyles />
                 <Component {...pageProps} />
                 <AuthMiddleware route={router.route} />
-              </ToastProvider>
-            </MaterialThemeProvider>
-          </ThemeProvider>
-        </AnimatePresence>
-      </AuthProvider>
-    </AxiosProvider>
+              </MaterialThemeProvider>
+            </AnimatePresence>
+          </AuthProvider>
+        </AxiosProvider>
+      </ToastProvider>
+    </ThemeProvider>
   );
 };
 

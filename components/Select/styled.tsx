@@ -25,7 +25,6 @@ export const InputContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.inputBackground};
   border: 1px solid ${({ theme }) => theme.colors.lineWhite};
   padding: 0 1rem;
-  font: 1.6rem Archivo;
   ${({ theme }) => theme.elevation[0]};
 `;
 
@@ -36,4 +35,9 @@ export const SelectInput = styled.input`
   border: 0;
   outline: 0;
   cursor: pointer;
+
+  ::placeholder {
+    font: ${({ theme }) => theme.fonts.regular};
+    color: ${({ theme }) => theme.colors.complementText};
+  }
 `;

@@ -14,7 +14,7 @@ const FormName: React.FC<FormNameProps> = memo(({ value, onChange }) => {
         label="Nome do evento"
         name="nome"
         placeholder="Escreva o nome do evento"
-        value={value}
+        defaultValue={value}
         onChange={onChange}
         required
       />

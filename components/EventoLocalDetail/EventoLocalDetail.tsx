@@ -12,11 +12,11 @@ type Endereco = {
   estado: string;
 };
 
-type EventoLocalDetailProps = {
-  endereco?: Endereco;
+type EnderecoContainerProps = {
+  nowWrap?: boolean;
 };
 
-const EnderecoContainer = styled.div`
+const EnderecoContainer = styled.div<EnderecoContainerProps>`
   margin: 2rem 0;
   display: flex;
   align-items: center;
@@ -25,19 +25,30 @@ const EnderecoContainer = styled.div`
     margin-right: 1rem;
   }
 
+  ${({ nowWrap }) =>
+    nowWrap &&
+    `
   p {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
+`}
 `;
 
-const EventoLocalDetail: React.FC<EventoLocalDetailProps> = ({ endereco }) => {
+type EventoLocalDetailProps = EnderecoContainerProps & {
+  endereco?: Endereco;
+};
+
+const EventoLocalDetail: React.FC<EventoLocalDetailProps> = ({
+  endereco,
+  nowWrap,
+}) => {
   const { cidade, bairro, estado, numero, rua, nomeLocal } = endereco ?? {};
   const textEndereco = `${nomeLocal} - ${rua}, ${numero}, ${bairro} - ${cidade} - ${estado}`;
   return (
-    <EnderecoContainer>
-      <CurrentLocation width={34} height={34} />
+    <EnderecoContainer nowWrap={nowWrap}>
+      <CurrentLocation width={24} height={24} />
       <p>{textEndereco}</p>
     </EnderecoContainer>
   );
