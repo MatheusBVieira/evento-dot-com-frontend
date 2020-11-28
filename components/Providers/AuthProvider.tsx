@@ -59,7 +59,7 @@ const AuthProvider = memo(({ children }) => {
 
     if (actualToken && !validated) {
       api
-        .get('/auth', { headers: { Authorization: actualToken } })
+        .get('/auth')
         .then(() => setValidated(true))
         .catch(() => logOut());
     } else {

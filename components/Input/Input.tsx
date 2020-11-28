@@ -1,4 +1,4 @@
-import { memo, ReactNode, useState } from 'react';
+import { memo, ReactNode, useEffect, useState } from 'react';
 
 import Label from '../Label';
 import { InputBlock, InputBox, StyledInput, Adorment } from './styled';
@@ -22,7 +22,7 @@ type InputProps = Props &
 const Input: React.FC<InputProps> = memo(
   ({
     label,
-    initialValue,
+    defaultValue,
     color,
     onChange,
     name,
@@ -35,31 +35,43 @@ const Input: React.FC<InputProps> = memo(
     type,
     ...rest
   }) => {
-    const [value, setValue] = useState(initialValue);
+    const [value, setValue] = useState(null);
 
-    const parseNumber = (value: string) =>
-      value === '' ? undefined : Number(value);
+    const formatInputValue = (value) => {
+      let maskedValue = value,
+        newValue = value;
+
+      const parseNumber = (value: string) =>
+        value === '' ? undefined : Number(value);
+
+      const replaceString = (s) => s && String(s).replace(/\D/g, '');
+
+      if (mask) {
+        newValue = parseNumber(replaceString(value));
+        maskedValue = stringFormat(mask, newValue);
+      } else if (type === 'money') {
+        newValue = currencyToFloat(value);
+        maskedValue = toCurrency(newValue);
+      } else if (type === 'number') {
+        maskedValue = replaceString(value);
+        newValue = parseNumber(maskedValue);
+      }
+      return { maskedValue, newValue };
+    };
 
     const handleChange = (event) => {
       const { value } = event.target;
-      let inputValue = value,
-        newValue = value;
-
-      if (mask) {
-        newValue = parseNumber(value.replace(/\D/g, ''));
-        inputValue = stringFormat(mask, newValue);
-      } else if (type === 'money') {
-        newValue = currencyToFloat(value);
-        inputValue = toCurrency(newValue);
-        console.log(inputValue);
-      } else if (type === 'number') {
-        inputValue = value.replace(/\D/g, '');
-        newValue = parseNumber(inputValue);
-      }
-
-      setValue(inputValue ?? '');
+      const { maskedValue, newValue } = formatInputValue(value);
+      setValue(maskedValue ?? '');
       onChange({ name, value: newValue });
     };
+
+    useEffect(() => {
+      if (defaultValue) {
+        const { maskedValue } = formatInputValue(defaultValue);
+        setValue(maskedValue ?? '');
+      }
+    }, []);
 
     return (
       <InputBlock fullWidth={fullWidth}>

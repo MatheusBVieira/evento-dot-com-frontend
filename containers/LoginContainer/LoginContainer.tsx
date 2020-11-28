@@ -35,7 +35,7 @@ const LoginContainer = () => {
               label="E-mail"
               name="email"
               type="email"
-              placeholder="email@mail.com"
+              placeholder="Digite o email"
               onChange={handleFormChange}
               required
             />
@@ -52,14 +52,14 @@ const LoginContainer = () => {
             />
           </Grid>
           <Grid item xs={6}>
-            <Button loading={loading} type={'submit'} variant="primary">
+            <Button loading={loading} type="submit" color="primary">
               Entrar
             </Button>
           </Grid>
           <Grid item xs={6}>
             <Button
               type="button"
-              variant="secondary"
+              color="secondary"
               onClick={() => push('/criar-conta')}
             >
               Não tem conta? Cadastre-se

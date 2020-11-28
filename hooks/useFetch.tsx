@@ -19,7 +19,7 @@ type FetchParams = {
 
 const useFetch = ({ method, path, skip, options, variables }: FetchParams) => {
   const showToast = useToast();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!skip);
   const [data, setData] = useState<any>();
 
   const api = useAxios();

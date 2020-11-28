@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Grid } from '@material-ui/core';
-import { Input, Button, useToast } from '../../components';
+import { Input, Button, useToast, useAuth } from '../../components';
 import { Container, Form, FormTitle } from './styled';
 import useMutate from '../../hooks/useMutate';
 
 type Conta = {
+  id?: number;
   email?: string;
   nome?: string;
   sobrenome?: string;
@@ -16,23 +17,21 @@ type Conta = {
 
 type ContaContainerProps = {
   conta?: Conta;
-  isEditing?: boolean;
 };
 
-const ContaContainer: React.FC<ContaContainerProps> = ({
-  conta,
-  isEditing,
-}) => {
+const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
+  const { logOut } = useAuth();
   const showToast = useToast();
   const { push } = useRouter();
   const [form, setForm] = useState<Conta>(conta);
+  const isEditing = !!conta.id;
 
   const handleFormChange = ({ value, name }) => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const [createUsuario, { loading }] = useMutate({
-    method: 'post',
+  const [mutateUsuario, { loading }] = useMutate({
+    method: isEditing ? 'put' : 'post',
     path: '/usuario',
     onCompleted: ({ id } = {}) => {
       if (id) {
@@ -47,7 +46,7 @@ const ContaContainer: React.FC<ContaContainerProps> = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     const { telefone, cpf } = form;
-    createUsuario({
+    mutateUsuario({
       ...form,
       telefone: String(telefone),
       cpf: String(cpf),
@@ -68,7 +67,7 @@ const ContaContainer: React.FC<ContaContainerProps> = ({
               type="email"
               placeholder="email@mail.com"
               onChange={handleFormChange}
-              required
+              required={!isEditing}
             />
           </Grid>
           <Grid item xs={12}>
@@ -79,7 +78,7 @@ const ContaContainer: React.FC<ContaContainerProps> = ({
               placeholder="Nome..."
               autoComplete="cc-name"
               onChange={handleFormChange}
-              required
+              required={!isEditing}
             />
           </Grid>
           <Grid item xs={12}>
@@ -89,18 +88,18 @@ const ContaContainer: React.FC<ContaContainerProps> = ({
               name="sobrenome"
               defaultValue={form.sobrenome}
               onChange={handleFormChange}
-              required
+              required={!isEditing}
             />
           </Grid>
           <Grid item xs={12}>
             <Input
-              label="Senha"
+              label={isEditing ? 'Nova senha' : 'Senha'}
               placeholder="************"
               name="senha"
               type="password"
               defaultValue={form.senha}
               onChange={handleFormChange}
-              required
+              required={!isEditing}
             />
           </Grid>
           <Grid item xs={12}>
@@ -111,7 +110,7 @@ const ContaContainer: React.FC<ContaContainerProps> = ({
               placeholder="000-000-000-00"
               mask="###-###-###-##"
               onChange={handleFormChange}
-              required
+              required={!isEditing}
             />
           </Grid>
           <Grid item xs={12}>
@@ -123,13 +122,27 @@ const ContaContainer: React.FC<ContaContainerProps> = ({
               placeholder="(00) 00000-0000"
               mask="(##) #####-####"
               onChange={handleFormChange}
-              required
+              required={!isEditing}
             />
           </Grid>
-          <Grid item xs={12} style={{ display: 'flex' }} justify="center">
-            <Button type="submit" variant="primary" loading={loading}>
+          <Grid
+            item
+            xs={12}
+            style={{ display: 'flex', justifyContent: 'space-between' }}
+          >
+            <Button type="submit" color="primary" loading={loading}>
               {isEditing ? 'Atualizar dados' : 'Cadastrar'}
             </Button>
+            {isEditing && (
+              <Button
+                type="button"
+                onClick={() => logOut()}
+                color="secondary"
+                loading={loading}
+              >
+                Sair
+              </Button>
+            )}
           </Grid>
         </Grid>
       </Form>

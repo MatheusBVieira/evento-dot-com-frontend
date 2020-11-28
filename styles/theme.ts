@@ -29,6 +29,7 @@ export const theme = {
   fonts: {
     titleLarge: "700 3rem 'Baloo Tamma 2'",
     title: "700 2.5rem 'Baloo Tamma 2'",
+    regularSemiBoldLarge: '600 3rem Poppins',
     regularSemiBold: '600 1.6rem Poppins',
     regular: '1.6rem Poppins',
     regularSmall: '1.4rem Poppins',
@@ -49,6 +50,10 @@ export const materialTheme = createMuiTheme({
     },
     secondary: {
       main: '#18C572',
+      contrastText: '#FAFAFC',
+    },
+    error: {
+      main: '#f44336',
       contrastText: '#FAFAFC',
     },
   },

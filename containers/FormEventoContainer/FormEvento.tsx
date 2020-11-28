@@ -68,7 +68,7 @@ const FormEvento = ({ evento }) => {
           </Grid>
           <FormTime value={form.dataEvento} onChange={handleFormChange} />
         </FormContent>
-        <Button type="submit" variant="secondary" loading={loading}>
+        <Button type="submit" color="secondary" loading={loading}>
           Publicar evento
         </Button>
       </Form>

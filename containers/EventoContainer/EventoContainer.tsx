@@ -51,7 +51,7 @@ const EventoContainer = ({ id }) => {
           </div>
           <EventoCompra>
             <p>{`Valor: ${toCurrency(preco || 0)}`}</p>
-            <Button onClick={handleClickBuy} variant="primary">
+            <Button onClick={handleClickBuy} color="primary">
               <ShoppingCartOutline width={24} height={24} />
               Comprar
             </Button>
