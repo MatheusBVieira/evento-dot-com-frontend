@@ -3,8 +3,8 @@ import { Grid } from '@material-ui/core';
 import { Input } from '../../../components';
 
 export type DataEvento = {
-  dataHoraInicio?: Date;
-  dataHoraFim?: Date;
+  dataHoraInicio?: string;
+  dataHoraFim?: string;
 };
 
 type FormTimeProps = {
@@ -32,6 +32,7 @@ const FormTime: React.FC<FormTimeProps> = memo(({ value, onChange }) => {
           label="início"
           name="dataHoraInicio"
           type="datetime-local"
+          defaultValue={time.dataHoraInicio}
           onChange={handleFormChange}
           required
         />
@@ -41,6 +42,7 @@ const FormTime: React.FC<FormTimeProps> = memo(({ value, onChange }) => {
           label="Fim"
           name="dataHoraFim"
           type="datetime-local"
+          defaultValue={time.dataHoraFim}
           onChange={handleFormChange}
           required
         />

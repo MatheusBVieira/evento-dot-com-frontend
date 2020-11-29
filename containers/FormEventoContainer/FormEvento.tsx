@@ -24,12 +24,18 @@ const FormEvento = ({ evento }) => {
   const showToast = useToast();
   const { push } = useRouter();
   const [form, setForm] = useState<FormEvento>(evento);
+  const isEditing = !!evento.id;
 
   const [insertEvento, { loading }] = useMutate({
-    method: 'post',
-    path: '/evento',
+    method: isEditing ? `put` : 'post',
+    path: isEditing ? `/evento/${evento.id}` : '/evento',
     onCompleted: () => {
-      showToast('Evento criado com sucesso', { type: 'success' });
+      showToast(
+        isEditing
+          ? 'Evento atualizado com sucesso'
+          : 'Evento criado com sucesso',
+        { type: 'success' }
+      );
       push('/eventos');
     },
   });
@@ -40,15 +46,21 @@ const FormEvento = ({ evento }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { dataEvento = {}, endereco = {}, detail = {}, nome } = form;
+    const {
+      dataEvento = {},
+      endereco = {},
+      detail: { categoria, ...restDetail } = {},
+      nome,
+    } = form;
     const { dataHoraFim, dataHoraInicio } = dataEvento;
     const input = {
+      ...restDetail,
       dataEvento: {
         dataHoraFim: dayjs(dataHoraFim).format('DD/MM/YYYY HH:mm'),
         dataHoraInicio: dayjs(dataHoraInicio).format('DD/MM/YYYY HH:mm'),
       },
       endereco,
-      ...detail,
+      categoria: categoria.value,
       nome,
     };
     insertEvento(input);
@@ -85,7 +97,7 @@ const FormEvento = ({ evento }) => {
           <FormTime value={form.dataEvento} onChange={handleFormChange} />
         </FormContent>
         <Button type="submit" color="secondary" loading={loading}>
-          Publicar evento
+          {isEditing ? 'Editar evento' : 'Publicar evento'}
         </Button>
       </Form>
     </Container>

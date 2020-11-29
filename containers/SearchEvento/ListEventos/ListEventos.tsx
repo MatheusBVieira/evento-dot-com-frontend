@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { CardEvento } from '../../../components';
+import { CardEvento, Loader } from '../../../components';
 import useFetch from '../../../hooks/useFetch';
 import { ListBanner, ListContainer, LoadMore } from './styled';
 
@@ -39,9 +39,11 @@ const ListEventos = () => {
   return (
     <ListBanner>
       <ListContainer>
-        {content.map((card, index) => (
-          <CardEvento key={index} {...card} />
-        ))}
+        {loading ? (
+          <Loader />
+        ) : (
+          content.map((card, index) => <CardEvento key={index} {...card} />)
+        )}
       </ListContainer>
       {!last && (
         <LoadMore

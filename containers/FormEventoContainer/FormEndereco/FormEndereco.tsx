@@ -84,7 +84,6 @@ const FormEndereco: React.FC<FormEnderecoProps> = memo(
             defaultValue={endereco.complemento}
             placeholder="Digite o complemento"
             onChange={handleFormChange}
-            required
           />
         </Grid>
 

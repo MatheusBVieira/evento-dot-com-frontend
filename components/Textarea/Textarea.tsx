@@ -13,8 +13,8 @@ type TextareaProps = Props &
   Omit<React.InputHTMLAttributes<HTMLTextAreaElement>, keyof Props>;
 
 export const Textarea: React.FC<TextareaProps> = memo(
-  ({ name, label, color, onChange, required, ...rest }) => {
-    const [value, setValue] = useState('');
+  ({ name, label, color, onChange, required, defaultValue, ...rest }) => {
+    const [value, setValue] = useState(defaultValue);
 
     const handleChange = (event) => {
       const { value } = event.target;
@@ -42,6 +42,7 @@ export const Textarea: React.FC<TextareaProps> = memo(
 
 Textarea.defaultProps = {
   color: 'ligthText',
+  defaultValue: '',
 };
 
 export default Textarea;

@@ -1,11 +1,11 @@
-import Head from 'next/head';
-
-import { FadeIn, useAuth, useToast } from '../components';
-
-import PageContainer from '../containers/PageContainer';
-import FormEvento from '../containers/FormEventoContainer';
 import { useEffect } from 'react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
+
+import { FadeIn, useAuth, useToast } from '../../components';
+
+import PageContainer from '../../containers/PageContainer';
+import FormEvento from '../../containers/FormEventoContainer';
 
 const CriarEvento = () => {
   const { token } = useAuth();
@@ -24,7 +24,7 @@ const CriarEvento = () => {
   return (
     <>
       <Head>
-        <title>Evento.com - Cadastro eventos</title>
+        <title>Evento.com - Criar evento</title>
       </Head>
       <FadeIn orientation="right-to-left">
         <PageContainer>

@@ -29,18 +29,18 @@ export type OptionType = {
 type SelectProps = {
   name: string;
   label?: string;
-  initialValue?: string | number;
+  defaultValue?: OptionType;
   placeholder?: string;
   color?: Colors;
   options?: Array<OptionType>;
   required?: boolean;
-  onChange: (target: { name: string; value: string | number }) => void;
+  onChange: (target: { name: string; value: OptionType }) => void;
 };
 
 export const Select: React.FC<SelectProps> = memo(
   ({
     name,
-    initialValue,
+    defaultValue,
     label,
     options,
     color,
@@ -49,27 +49,23 @@ export const Select: React.FC<SelectProps> = memo(
     required,
   }) => {
     const selectRef = useRef();
-    const [selectedValue, setSelectedValue] = useState<OptionType>({
-      label: '',
-      value: null,
-    });
+    const [selectedValue, setSelectedValue] = useState<OptionType>(
+      defaultValue
+    );
     const [inputValue, setInputValue] = useState<string>(null);
     const [expand, setExpand] = useState(false);
     useClickAway(() => setInputValue(null), selectRef);
 
-    useEffect(() => {
-      if (initialValue !== undefined && selectedValue.value === null) {
-        const initial = options.find((option) => option.value === initialValue);
-        initial && setSelectedValue(initial);
-      }
-    }, [options]);
-
     const handleClickOption = useCallback(
       (option = {}) => {
         const { value, label } = option;
+        const selectedValue = {
+          label: label || '',
+          value: label && String(value),
+        };
         setInputValue(null);
-        setSelectedValue({ label: label || '', value: label && String(value) });
-        onChange({ name, value });
+        setSelectedValue(selectedValue);
+        onChange({ name, value: selectedValue });
         setExpand(false);
       },
       [name]
@@ -147,6 +143,10 @@ Select.defaultProps = {
   color: 'ligthText',
   placeholder: 'Selecione uma opção',
   options: [],
+  defaultValue: {
+    label: '',
+    value: null,
+  },
 };
 
 export default Select;

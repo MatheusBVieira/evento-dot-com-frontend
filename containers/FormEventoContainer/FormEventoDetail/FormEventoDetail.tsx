@@ -7,7 +7,7 @@ import useFetch from '../../../hooks/useFetch';
 export type EventoDetail = {
   preco?: number;
   capacidadePessoas?: string;
-  categoria?: number;
+  categoria?: { value: number; label: string };
   descricao?: string;
 };
 
@@ -85,6 +85,7 @@ const FormEventoDetail: React.FC<FormEventoDetailProps> = memo(
           <Select
             label="Categoria"
             name="categoria"
+            defaultValue={detail.categoria}
             options={content.map((c) => ({ value: c.id, label: c.descricao }))}
             onChange={handleFormChange}
             required

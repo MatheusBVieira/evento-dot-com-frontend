@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { ThemeProvider as MaterialThemeProvider } from '@material-ui/core';
@@ -8,9 +10,9 @@ import {
   AxiosProvider,
   AuthProvider,
   useAuth,
+  useToast,
 } from '../components';
 import { theme, materialTheme } from '../styles/theme';
-import { useEffect } from 'react';
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -64,11 +66,13 @@ const GlobalStyles = createGlobalStyle`
 
 const AuthMiddleware = ({ route }) => {
   const { validateToken } = useAuth();
+
   useEffect(() => {
     if (route) {
       validateToken();
     }
   }, [route]);
+
   return null;
 };
 

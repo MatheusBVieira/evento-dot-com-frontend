@@ -44,7 +44,7 @@ const LoginContainer = () => {
           <Grid item xs={12}>
             <Input
               label="Senha"
-              placeholder="************"
+              placeholder="Digite a senha"
               name="senha"
               type="password"
               onChange={handleFormChange}
