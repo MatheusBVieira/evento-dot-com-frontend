@@ -53,7 +53,11 @@ const SearchEventoInputs = () => {
       </SearchInput>
 
       <SearchTerm>
-        Termo de busca:&nbsp;<span>{term}</span>
+        {term && (
+          <>
+            Termo de busca:&nbsp;<span>{term}</span>
+          </>
+        )}
       </SearchTerm>
       <MenuButton
         label="Ordenar por"
