@@ -37,7 +37,6 @@ export const LoadMore = styled(Button)`
 `;
 
 export const NoEventLabel = styled.p`
-mar
   color: ${({ theme }) => theme.colors.ligthText};
   font: ${({ theme }) => theme.fonts.regular};
 `;

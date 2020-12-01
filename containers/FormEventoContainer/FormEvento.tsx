@@ -15,7 +15,6 @@ import useMutate from '../../hooks/useMutate';
 
 type FormEvento = {
   nome?: string;
-  imagem?: any;
   detail?: EventoDetail;
   endereco?: Endereco;
   dataEvento?: DataEvento;
@@ -74,10 +73,7 @@ const FormEvento = ({ evento }) => {
           <Grid item xs={12}>
             <FormTitle>1. Qual é nome do evento?</FormTitle>
           </Grid>
-          <FormName
-            value={{ nome: form.nome, imagem: form.imagem }}
-            onChange={handleFormChange}
-          />
+          <FormName value={form.nome} onChange={handleFormChange} />
         </FormContent>
 
         <FormContent container spacing={4}>
