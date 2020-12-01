@@ -40,7 +40,7 @@ const ListEventos = () => {
     <ListBanner>
       {loading ? (
         <Loader />
-      ) : content.length < 0 ? (
+      ) : content.length > 0 ? (
         <ListContainer>
           {content.map((card, index) => (
             <CardEvento key={index} {...card} />
