@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 type LabelProps = {
-  color: Colors;
-  required: boolean;
+  color?: Colors;
+  required?: boolean;
 };
 
 const Label = styled.label<LabelProps>`
@@ -13,5 +13,9 @@ const Label = styled.label<LabelProps>`
     ${({ required }) => required && `content: ' * '; color: red;`};
   }
 `;
+
+Label.defaultProps = {
+  color: 'ligthText',
+};
 
 export default Label;

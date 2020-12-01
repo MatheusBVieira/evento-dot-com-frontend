@@ -1,27 +1,29 @@
 import { memo } from 'react';
 
 import { Grid } from '@material-ui/core';
-import { Input } from '../../../components';
+import { Input, Loader } from '../../../components';
 import useFetch from '../../../hooks/useFetch';
 
 const FormParticipante = memo(() => {
-  const { data = {} } = useFetch({ method: 'get', path: '/usuario' });
+  const { data = {}, loading } = useFetch({ method: 'get', path: '/usuario' });
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <>
       <Grid item md={6} sm={6} xs={12}>
-        <Input label="Nome" value={data.nome} disabled />
+        <Input label="Nome" defaultValue={data.nome} disabled />
       </Grid>
       <Grid item md={6} sm={6} xs={12}>
-        <Input label="Sobrenome" value={data.sobrenome} disabled />
+        <Input label="Sobrenome" defaultValue={data.sobrenome} disabled />
       </Grid>
       <Grid item md={6} sm={6} xs={12}>
-        <Input label="E-mail" value={data.email} disabled />
+        <Input label="E-mail" defaultValue={data.email} disabled />
       </Grid>
       <Grid item md={6} sm={6} xs={12}>
         <Input
           label="Telefone"
-          value={data.telefone}
+          defaultValue={data.telefone}
           mask="(##) #####-####"
           disabled
         />

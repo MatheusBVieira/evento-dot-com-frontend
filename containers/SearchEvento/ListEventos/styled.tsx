@@ -35,3 +35,8 @@ export const LoadMore = styled(Button)`
     font: ${({ theme }) => theme.fonts.regular};
   }
 `;
+
+export const NoEventLabel = styled.p`
+  color: ${({ theme }) => theme.colors.ligthText};
+  font: ${({ theme }) => theme.fonts.regular};
+`;

@@ -3,7 +3,13 @@ import { Tabs } from '@material-ui/core';
 
 import { Loader, Button } from '../../components';
 import EventoCard from './EventoCard';
-import { Container, TabsContainer, Tab, ListContainer } from './styled';
+import {
+  Container,
+  TabsContainer,
+  Tab,
+  ListContainer,
+  NoEventLabel,
+} from './styled';
 import useFetch from '../../hooks/useFetch';
 
 const EventosListContainer = () => {
@@ -44,9 +50,13 @@ const EventosListContainer = () => {
 
   const renderCriados = () => (
     <>
-      {criados.map((evento, index) => (
-        <EventoCard key={index} edit evento={evento} />
-      ))}
+      {criados.length > 0 ? (
+        criados.map((evento, index) => (
+          <EventoCard key={index} edit evento={evento} />
+        ))
+      ) : (
+        <NoEventLabel>Você ainda não criou nenhum evento</NoEventLabel>
+      )}
       {!lastCriados && (
         <Button
           onClick={() => handleFetchMore(pageNumberCriados, fetchMoreCriados)}
@@ -60,9 +70,13 @@ const EventosListContainer = () => {
 
   const renderCompras = () => (
     <>
-      {compras.map((compra, index) => (
-        <EventoCard key={index} evento={compra.evento} />
-      ))}
+      {compras.length > 0 ? (
+        compras.map((compra, index) => (
+          <EventoCard key={index} evento={compra.evento} />
+        ))
+      ) : (
+        <NoEventLabel>Você ainda não comprou nenhum evento</NoEventLabel>
+      )}
       {!lastCompras && (
         <Button
           onClick={() => handleFetchMore(pageNumberCompras, fetchMoreCompras)}

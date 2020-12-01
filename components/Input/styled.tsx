@@ -37,6 +37,7 @@ export const InputBox = styled.div<InputBoxProps>`
       : theme.colors.inputBackground};
   border: 1px solid ${({ theme }) => theme.colors.lineWhite};
   padding: 0 1.6rem;
+  margin-top: 0.5rem;
   ${({ theme }) => theme.elevation[0]};
 `;
 

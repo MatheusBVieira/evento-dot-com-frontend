@@ -9,16 +9,18 @@ type FormNameProps = {
 
 const FormName: React.FC<FormNameProps> = memo(({ value, onChange }) => {
   return (
-    <Grid item xs={12}>
-      <Input
-        label="Nome do evento"
-        name="nome"
-        placeholder="Escreva o nome do evento"
-        defaultValue={value}
-        onChange={onChange}
-        required
-      />
-    </Grid>
+    <>
+      <Grid item xs={12}>
+        <Input
+          label="Nome do evento"
+          name="nome"
+          placeholder="Escreva o nome do evento"
+          defaultValue={value}
+          onChange={onChange}
+          required
+        />
+      </Grid>
+    </>
   );
 });
 

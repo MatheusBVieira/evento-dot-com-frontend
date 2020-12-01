@@ -32,3 +32,8 @@ export const ListContainer = styled.div`
   align-items: center;
   flex-direction: column;
 `;
+
+export const NoEventLabel = styled.p`
+  color: ${({ theme }) => theme.colors.ligthText};
+  font: ${({ theme }) => theme.fonts.regular};
+`;

@@ -53,7 +53,7 @@ const CompraContainer = ({ id }) => {
 
           <Grid item md={7} sm={6} xs={12}>
             <FormContent>
-              <Grid container spacing={4}>
+              <Grid container spacing={4} justify="center">
                 <Grid item xs={12}>
                   <FormTitle>Informações do participante</FormTitle>
                 </Grid>

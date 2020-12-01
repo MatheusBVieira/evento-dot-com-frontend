@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { CardEvento, Loader } from '../../../components';
 import useFetch from '../../../hooks/useFetch';
-import { ListBanner, ListContainer, LoadMore } from './styled';
+import { ListBanner, ListContainer, LoadMore, NoEventLabel } from './styled';
 
 const SORT_KEYS = {
   MENOR_PRECO: 'preco',
@@ -38,13 +38,18 @@ const ListEventos = () => {
 
   return (
     <ListBanner>
-      <ListContainer>
-        {loading ? (
-          <Loader />
-        ) : (
-          content.map((card, index) => <CardEvento key={index} {...card} />)
-        )}
-      </ListContainer>
+      {loading ? (
+        <Loader />
+      ) : content.length < 0 ? (
+        <ListContainer>
+          {content.map((card, index) => (
+            <CardEvento key={index} {...card} />
+          ))}
+        </ListContainer>
+      ) : (
+        <NoEventLabel>Nenhum evento encontrado</NoEventLabel>
+      )}
+
       {!last && (
         <LoadMore
           onClick={handleFetchMore}
