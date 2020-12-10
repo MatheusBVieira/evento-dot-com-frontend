@@ -52,11 +52,7 @@ const ListEventos = () => {
       )}
 
       {!last && (
-        <LoadMore
-          onClick={handleFetchMore}
-          variant="contained"
-          color="secondary"
-        >
+        <LoadMore onClick={handleFetchMore} variant="contained" color="primary">
           Ver mais eventos
         </LoadMore>
       )}

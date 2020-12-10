@@ -5,7 +5,9 @@ import {
   EventoLocalDetail,
   EventoDataDetail,
   Button,
+  useToast,
 } from '../../../components';
+import useMutate from '../../../hooks/useMutate';
 import {
   Card,
   Title,
@@ -13,6 +15,8 @@ import {
   EventoDetail,
   EventoStatus,
   EventoStatusContainer,
+  ActionButton,
+  DeleteButton,
 } from './styled';
 
 type EventoCardProps = {
@@ -21,9 +25,22 @@ type EventoCardProps = {
 };
 
 const EventoCard: React.FC<EventoCardProps> = ({ evento, edit }) => {
+  const showToast = useToast();
   const { push } = useRouter();
-  const { id, nome, descricao, dataEvento, endereco } = evento;
+  const { id, nome, descricao, dataEvento, endereco, comprado } = evento;
   const isAtivo = dayjs(dataEvento.dataHoraFim).isAfter(dayjs());
+
+  const [deleteEvento, { loading }] = useMutate({
+    method: 'delete',
+    path: `/evento/${id}`,
+    onCompleted: () => {
+      showToast('Evento deletado com sucesso', { type: 'success' });
+    },
+  });
+
+  const handleDeleteEvento = () => {
+    deleteEvento();
+  };
 
   return (
     <Card>
@@ -34,9 +51,19 @@ const EventoCard: React.FC<EventoCardProps> = ({ evento, edit }) => {
       </EventoDetail>
       <EventoStatusContainer>
         {edit ? (
-          <Button color="primary" onClick={() => push(`/criar-evento/${id}`)}>
-            Editar
-          </Button>
+          <ActionButton>
+            <Button
+              color="secondary"
+              onClick={() => push(`/criar-evento/${id}`)}
+            >
+              Editar
+            </Button>
+            {!comprado && (
+              <DeleteButton loading={loading} onClick={handleDeleteEvento}>
+                Excluir
+              </DeleteButton>
+            )}
+          </ActionButton>
         ) : (
           <EventoStatus color={isAtivo ? 'primary' : 'featuredText'}>
             {isAtivo ? 'Evento ativo' : 'Evento finalizado'}

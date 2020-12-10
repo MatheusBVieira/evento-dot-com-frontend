@@ -137,7 +137,7 @@ const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
               <Button
                 type="button"
                 onClick={() => logOut()}
-                color="secondary"
+                color="primary"
                 loading={loading}
               >
                 Sair

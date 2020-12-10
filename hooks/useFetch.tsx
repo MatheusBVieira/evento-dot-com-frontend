@@ -4,7 +4,6 @@ import { AxiosRequestConfig } from 'axios';
 
 enum METHODS {
   get = 'get',
-  delete = 'delete',
   head = 'head',
   options = 'options',
 }

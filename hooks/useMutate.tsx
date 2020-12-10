@@ -5,6 +5,7 @@ import { AxiosRequestConfig } from 'axios';
 enum METHODS {
   post = 'post',
   put = 'put',
+  delete = 'delete',
   patch = 'patch',
 }
 
@@ -21,7 +22,8 @@ type MutateResult = {
   loading: boolean;
 };
 
-type Mutate = (variables: any) => Promise<{ data: any; e: Error }>;
+type PromiseResult = { data: any; e: Error };
+type Mutate = (variables?: any) => Promise<PromiseResult>;
 
 type IUseMutate = (params: MutateParams) => [Mutate, MutateResult];
 
@@ -39,15 +41,23 @@ const useMutate: IUseMutate = ({
   const api = useAxios();
   const action = api[method] as any;
 
-  const mutate = async (variables: any) => {
-    setLoading(true);
-
-    const response = await action(path, variables, {
+  const handleAction = async (variables: any) => {
+    const defaultOptions = {
       headers: {
         'Content-Type': 'application/json',
       },
       ...options,
-    })
+    };
+
+    return method === 'delete'
+      ? await action(path, defaultOptions)
+      : await action(path, variables, defaultOptions);
+  };
+
+  const mutate = async (variables: any) => {
+    setLoading(true);
+
+    const response: any = await handleAction(variables)
       .then(({ data }) => {
         setData(data);
         onCompleted && onCompleted(data);
@@ -55,7 +65,7 @@ const useMutate: IUseMutate = ({
       .catch((e: Error) => toast && showToast(e.message, { type: 'error' }))
       .finally(() => setLoading(false));
 
-    return response;
+    return response as PromiseResult;
   };
 
   return [mutate, { loading, data }];

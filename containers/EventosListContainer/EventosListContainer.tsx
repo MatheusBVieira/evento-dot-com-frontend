@@ -60,7 +60,7 @@ const EventosListContainer = () => {
       {!lastCriados && (
         <Button
           onClick={() => handleFetchMore(pageNumberCriados, fetchMoreCriados)}
-          color="secondary"
+          color="primary"
         >
           Carregar mais
         </Button>
@@ -80,7 +80,7 @@ const EventosListContainer = () => {
       {!lastCompras && (
         <Button
           onClick={() => handleFetchMore(pageNumberCompras, fetchMoreCompras)}
-          color="secondary"
+          color="primary"
         >
           Carregar mais
         </Button>
@@ -95,8 +95,8 @@ const EventosListContainer = () => {
       <TabsContainer>
         <Tabs
           value={tab}
-          indicatorColor="secondary"
-          textColor="secondary"
+          indicatorColor="primary"
+          textColor="primary"
           onChange={(_, t) => setTab(t)}
         >
           <Tab label="Meus ingressos" />

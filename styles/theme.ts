@@ -45,11 +45,11 @@ export const theme = {
 export const materialTheme = createMuiTheme({
   palette: {
     primary: {
-      main: '#FF9023',
+      main: '#18C572',
       contrastText: '#FAFAFC',
     },
     secondary: {
-      main: '#18C572',
+      main: '#FF9023',
       contrastText: '#FAFAFC',
     },
     error: {

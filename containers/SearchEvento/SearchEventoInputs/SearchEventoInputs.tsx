@@ -46,7 +46,7 @@ const SearchEventoInputs = () => {
         <StyledButton
           onClick={handleSearchTerm}
           variant="contained"
-          color="secondary"
+          color="primary"
         >
           Buscar
         </StyledButton>

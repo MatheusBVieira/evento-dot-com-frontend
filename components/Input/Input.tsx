@@ -44,10 +44,10 @@ const Input: React.FC<InputProps> = memo(
       const parseNumber = (value: string) =>
         value === '' ? undefined : Number(value);
 
-      const replaceString = (s) => s && String(s).replace(/\D/g, '');
+      const replaceString = (s) => String(s).replace(/\D/g, '');
 
       if (mask) {
-        newValue = parseNumber(replaceString(value));
+        newValue = replaceString(value);
         maskedValue = stringFormat(mask, newValue);
       } else if (type === 'money') {
         newValue = currencyToFloat(value);
@@ -56,6 +56,7 @@ const Input: React.FC<InputProps> = memo(
         maskedValue = replaceString(value);
         newValue = parseNumber(maskedValue);
       }
+
       return { maskedValue, newValue };
     };
 

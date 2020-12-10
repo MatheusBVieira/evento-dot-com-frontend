@@ -96,7 +96,7 @@ const FormEvento = ({ evento }) => {
           </Grid>
           <FormTime value={form.dataEvento} onChange={handleFormChange} />
         </FormContent>
-        <Button type="submit" color="secondary" loading={loading}>
+        <Button type="submit" color="primary" loading={loading}>
           {isEditing ? 'Editar evento' : 'Publicar evento'}
         </Button>
       </Form>

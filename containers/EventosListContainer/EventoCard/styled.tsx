@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
+import { Button } from '../../../components';
 
 export const Card = styled(Paper)`
   width: 100%;
@@ -62,6 +63,22 @@ export const EventoStatus = styled.div<EventoStatusProps>`
   border-radius: 0.5rem;
   background-color: ${({ theme, color }) => theme.colors[color]};
   font: ${({ theme }) => theme.fonts.regularSemiBold};
-
   ${({ theme }) => theme.elevation[1]};
+`;
+
+export const ActionButton = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+`;
+
+export const DeleteButton = styled(Button)`
+  && {
+    color: ${({ theme }) => theme.colors.ligthText};
+    background-color: ${({ theme }) => theme.colors.error};
+    :hover,
+    :focus {
+      background-color: ${({ theme }) => theme.colors.errorDark};
+    }
+  }
 `;

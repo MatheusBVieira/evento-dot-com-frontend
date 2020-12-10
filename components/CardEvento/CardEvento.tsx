@@ -33,7 +33,7 @@ const CardEvento: React.FC<CardEvento> = ({ nome, descricao, preco, id }) => {
       <StyledButton
         onClick={handleClickCard}
         variant="contained"
-        color="secondary"
+        color="primary"
       >
         Ver mais
       </StyledButton>
