@@ -1,10 +1,12 @@
 import styled from 'styled-components';
+import { Button } from '../../components';
 
 export const Container = styled.main`
   max-width: 640px;
   margin: 2rem auto;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
@@ -22,4 +24,15 @@ export const Form = styled.form`
 export const FormTitle = styled.p`
   font: ${({ theme }) => theme.fonts.title};
   color: ${({ theme }) => theme.colors.ligthText};
+`;
+
+export const DeleteButton = styled(Button)`
+  && {
+    color: ${({ theme }) => theme.colors.ligthText};
+    background-color: ${({ theme }) => theme.colors.error};
+    :hover,
+    :focus {
+      background-color: ${({ theme }) => theme.colors.errorDark};
+    }
+  }
 `;

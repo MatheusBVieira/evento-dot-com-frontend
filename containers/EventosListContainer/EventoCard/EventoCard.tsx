@@ -38,10 +38,6 @@ const EventoCard: React.FC<EventoCardProps> = ({ evento, edit }) => {
     },
   });
 
-  const handleDeleteEvento = () => {
-    deleteEvento();
-  };
-
   return (
     <Card>
       <EventoDetail>
@@ -59,7 +55,7 @@ const EventoCard: React.FC<EventoCardProps> = ({ evento, edit }) => {
               Editar
             </Button>
             {!comprado && (
-              <DeleteButton loading={loading} onClick={handleDeleteEvento}>
+              <DeleteButton loading={loading} onClick={() => deleteEvento()}>
                 Excluir
               </DeleteButton>
             )}

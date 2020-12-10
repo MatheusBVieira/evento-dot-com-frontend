@@ -1,4 +1,4 @@
-import { memo, createContext, useContext, useMemo } from 'react';
+import { memo, createContext, useContext } from 'react';
 import axios, { AxiosInstance } from 'axios';
 
 const AxiosContext = createContext<any>(null);

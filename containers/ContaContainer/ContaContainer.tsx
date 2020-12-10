@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Grid } from '@material-ui/core';
 import { Input, Button, useToast, useAuth } from '../../components';
-import { Container, Form, FormTitle } from './styled';
+import { Container, Form, FormTitle, DeleteButton } from './styled';
 import useMutate from '../../hooks/useMutate';
 
 type Conta = {
@@ -25,6 +25,15 @@ const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
   const { push } = useRouter();
   const [form, setForm] = useState<Conta>(conta);
   const isEditing = !!conta.id;
+
+  const [deleteUsuario, { loading: loadingDelete }] = useMutate({
+    method: 'delete',
+    path: `/usuario/${conta.id}`,
+    onCompleted: () => {
+      showToast('Conta deletada com sucesso', { type: 'success' });
+      push('/');
+    },
+  });
 
   const handleFormChange = ({ value, name }) => {
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -110,6 +119,7 @@ const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
               placeholder="Digite seu cpf"
               mask="###-###-###-##"
               onChange={handleFormChange}
+              disabled={isEditing}
               required={!isEditing}
             />
           </Grid>
@@ -143,6 +153,14 @@ const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
                 Sair
               </Button>
             )}
+          </Grid>
+          <Grid item xs={12}>
+            <DeleteButton
+              loading={loadingDelete}
+              onClick={() => deleteUsuario()}
+            >
+              Excluir
+            </DeleteButton>
           </Grid>
         </Grid>
       </Form>
