@@ -25,7 +25,7 @@ const EventosListContainer = () => {
     fetchMore: fetchMoreCriados,
   } = useFetch({
     method: 'get',
-    path: '/evento',
+    path: '/evento/criador',
   });
 
   const {

@@ -10,7 +10,7 @@ import {
 } from './styled';
 
 type QueryParams = {
-  term: ReactText;
+  nome: ReactText;
   orderBy: ReactText;
 };
 
@@ -18,10 +18,10 @@ const SearchEventoInputs = () => {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState<ReactText>();
   const [query, setQuery] = useState(router.query as QueryParams);
-  const { term, orderBy } = query;
+  const { nome, orderBy } = query;
 
   const handleSearchTerm = () => {
-    setQuery((prev) => ({ ...prev, term: searchTerm }));
+    setQuery((prev) => ({ ...prev, nome: searchTerm }));
   };
 
   const handleOrderBy = (value) => {
@@ -53,9 +53,9 @@ const SearchEventoInputs = () => {
       </SearchInput>
 
       <SearchTerm>
-        {term && (
+        {nome && (
           <>
-            Termo de busca:&nbsp;<span>{term}</span>
+            Termo de busca:&nbsp;<span>{nome}</span>
           </>
         )}
       </SearchTerm>

@@ -10,13 +10,14 @@ const SORT_KEYS = {
 };
 
 const ListEventos = () => {
-  const { query: { orderBy, term } = {} } = useRouter();
+  const { query: { orderBy, nome } = {} } = useRouter();
   const variables = useMemo(
     () => ({
       pageSize: 12,
       sort: orderBy ? SORT_KEYS[orderBy as string] : undefined,
+      nome,
     }),
-    [orderBy]
+    [orderBy, nome]
   );
 
   const {
