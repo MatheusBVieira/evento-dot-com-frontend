@@ -51,12 +51,12 @@ const LoginContainer = () => {
               required
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item sm={6} xs={12}>
             <Button loading={loading} type="submit" color="primary">
               Entrar
             </Button>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item sm={6} xs={12}>
             <Button
               type="button"
               color="secondary"

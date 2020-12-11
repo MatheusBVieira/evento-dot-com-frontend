@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const StyledButton = styled(MaterialButton)`
   && {
-    height: 4.6rem;
+    min-height: 4.6rem;
     font: ${({ theme }) => theme.fonts.regular};
   }
 `;
