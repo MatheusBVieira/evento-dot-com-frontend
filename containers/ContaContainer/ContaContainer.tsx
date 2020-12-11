@@ -154,14 +154,16 @@ const ContaContainer: React.FC<ContaContainerProps> = ({ conta }) => {
               </Button>
             )}
           </Grid>
-          <Grid item xs={12}>
-            <DeleteButton
-              loading={loadingDelete}
-              onClick={() => deleteUsuario()}
-            >
-              Excluir
-            </DeleteButton>
-          </Grid>
+          {isEditing && (
+            <Grid item xs={12}>
+              <DeleteButton
+                loading={loadingDelete}
+                onClick={() => deleteUsuario()}
+              >
+                Excluir
+              </DeleteButton>
+            </Grid>
+          )}
         </Grid>
       </Form>
     </Container>

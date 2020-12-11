@@ -4,7 +4,7 @@ import { Button } from '../../components';
 export const Container = styled.main`
   max-width: 640px;
   margin: 2rem auto;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
