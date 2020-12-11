@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Content = styled.section`
   position: relative;
   width: 100%;
+  min-height: 100vh;
 `;
 
 export const BackgoundImage = styled.div`
