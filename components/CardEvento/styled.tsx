@@ -10,6 +10,9 @@ export const EventoHeader = styled.div`
 
 export const EventoNome = styled.p`
   font: ${({ theme }) => theme.fonts.title};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const EventoPreco = styled.p`

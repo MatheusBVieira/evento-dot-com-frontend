@@ -10,7 +10,7 @@ const ListCategoriaEvento = () => {
 
   return (
     <Container>
-      <CategoriaTitle>Categoria</CategoriaTitle>
+      <CategoriaTitle>Eventos</CategoriaTitle>
       <ListBanner>
         <ListContainer>
           <Carousel>

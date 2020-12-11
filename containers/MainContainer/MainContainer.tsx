@@ -12,8 +12,6 @@ const MainContainer = () => {
       </BackgoundImage>
       <DestaqueEvento />
       <ListCategoriaEvento />
-      <ListCategoriaEvento />
-      <ListCategoriaEvento />
     </Content>
   );
 };

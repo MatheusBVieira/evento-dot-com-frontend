@@ -14,10 +14,11 @@ type Endereco = {
 
 type EnderecoContainerProps = {
   nowWrap?: boolean;
+  disableSpacing?: boolean;
 };
 
 const EnderecoContainer = styled.div<EnderecoContainerProps>`
-  margin: 2rem 0;
+  margin: ${({ disableSpacing }) => !disableSpacing && '2rem 0'};
   display: flex;
   align-items: center;
 
@@ -38,20 +39,25 @@ const EnderecoContainer = styled.div<EnderecoContainerProps>`
 
 type EventoLocalDetailProps = EnderecoContainerProps & {
   endereco?: Endereco;
+  disableIcon?: boolean;
 };
 
 const EventoLocalDetail: React.FC<EventoLocalDetailProps> = ({
   endereco,
   nowWrap,
+  disableIcon,
+  disableSpacing,
 }) => {
   const { cidade, bairro, estado, numero, rua, nomeLocal } = endereco ?? {};
-  const textEndereco = `${nomeLocal} - ${rua}, ${numero}, ${bairro} - ${cidade} - ${estado}`;
-  return (
-    <EnderecoContainer nowWrap={nowWrap}>
-      <CurrentLocation width={24} height={24} />
+  const textEndereco = nomeLocal
+    ? `${nomeLocal} - ${rua}, ${numero}, ${bairro} - ${cidade} - ${estado}`
+    : null;
+  return textEndereco ? (
+    <EnderecoContainer nowWrap={nowWrap} disableSpacing={disableSpacing}>
+      {!disableIcon && <CurrentLocation width={24} height={24} />}
       <p>{textEndereco}</p>
     </EnderecoContainer>
-  );
+  ) : null;
 };
 
 export default EventoLocalDetail;

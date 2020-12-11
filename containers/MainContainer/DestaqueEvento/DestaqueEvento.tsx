@@ -1,5 +1,11 @@
+import React, { memo } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { Loader } from '../../../components';
+import {
+  EventoDataDetail,
+  EventoLocalDetail,
+  Loader,
+} from '../../../components';
 import useFetch from '../../../hooks/useFetch';
 
 import {
@@ -16,12 +22,18 @@ import {
 } from './styled';
 
 const DestaqueEvento = () => {
-  const { data, loading } = useFetch({
+  const { push } = useRouter();
+
+  const { data: { content = [] } = {}, loading } = useFetch({
     method: 'get',
-    path: '/compra/destaque',
+    path: '/evento',
   });
 
-  console.log(data);
+  const { id, nome, dataEvento, endereco, descricao } = content[0] ?? {};
+
+  const handleClickCard = () => {
+    id && push(`/evento/${id}`);
+  };
 
   return (
     <StyledContainer>
@@ -39,23 +51,22 @@ const DestaqueEvento = () => {
             />
           </DestaqueImage>
           <DestaqueDescricao>
-            <DataEvento>18 de dezembro</DataEvento>
-            <NomeEvento>Nome do evento</NomeEvento>
-            <p>local do evento</p>
+            <DataEvento>
+              <EventoDataDetail
+                disableSpacing
+                disableIcon
+                dataEvento={dataEvento}
+              />
+            </DataEvento>
+            <NomeEvento>{nome}</NomeEvento>
+            <EventoLocalDetail disableSpacing disableIcon endereco={endereco} />
             <StyledDivider />
-            <DescricaoEvento>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </DescricaoEvento>
-            <StyledButton variant="contained" color="primary">
+            <DescricaoEvento>{descricao}</DescricaoEvento>
+            <StyledButton
+              variant="contained"
+              color="primary"
+              onClick={handleClickCard}
+            >
               Ver detalhes
             </StyledButton>
           </DestaqueDescricao>
@@ -65,4 +76,4 @@ const DestaqueEvento = () => {
   );
 };
 
-export default DestaqueEvento;
+export default memo(DestaqueEvento);
