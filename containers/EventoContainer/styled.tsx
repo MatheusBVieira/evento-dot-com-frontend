@@ -4,7 +4,7 @@ export const Container = styled.main`
   max-width: 1080px;
   width: 100%;
   margin: 2rem auto;
-  min-height: 100vh;
+  height: 100vh;
 `;
 
 export const Content = styled.article`

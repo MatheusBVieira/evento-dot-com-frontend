@@ -27,7 +27,8 @@ type EventoCardProps = {
 const EventoCard: React.FC<EventoCardProps> = ({ evento, edit }) => {
   const showToast = useToast();
   const { push } = useRouter();
-  const { id, nome, descricao, dataEvento, endereco, comprado } = evento;
+  const { id, nome, descricao, dataEvento = {}, endereco, comprado } =
+    evento || {};
   const isAtivo = dayjs(dataEvento.dataHoraFim).isAfter(dayjs());
 
   const [deleteEvento, { loading }] = useMutate({
