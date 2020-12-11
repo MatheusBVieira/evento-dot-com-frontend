@@ -29,7 +29,7 @@ const EventoCard: React.FC<EventoCardProps> = ({ evento, edit }) => {
   const { push } = useRouter();
   const { id, nome, descricao, dataEvento = {}, endereco, comprado } =
     evento || {};
-  const isAtivo = dayjs(dataEvento.dataHoraFim).isAfter(dayjs());
+  const isAtivo = dayjs(dataEvento.dataHoraFim).isBefore(dayjs());
 
   const [deleteEvento, { loading }] = useMutate({
     method: 'delete',
