@@ -8,7 +8,7 @@ import PageContainer from '../../containers/PageContainer';
 import FormEvento from '../../containers/FormEventoContainer';
 import useFetch from '../../hooks/useFetch';
 
-const CriarEvento = () => {
+const EditarEvento = () => {
   const { token } = useAuth();
   const showToast = useToast();
   const { push, query } = useRouter();
@@ -74,4 +74,4 @@ const CriarEvento = () => {
   );
 };
 
-export default CriarEvento;
+export default EditarEvento;

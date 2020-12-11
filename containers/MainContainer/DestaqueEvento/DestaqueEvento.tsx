@@ -15,7 +15,7 @@ import {
   DescricaoEvento,
 } from './styled';
 
-const MainContainer = () => {
+const DestaqueEvento = () => {
   const { data, loading } = useFetch({
     method: 'get',
     path: '/compra/destaque',
@@ -65,4 +65,4 @@ const MainContainer = () => {
   );
 };
 
-export default MainContainer;
+export default DestaqueEvento;
