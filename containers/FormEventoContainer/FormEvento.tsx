@@ -53,6 +53,14 @@ const FormEvento = ({ evento }) => {
       nome,
     } = form;
     const { dataHoraFim, dataHoraInicio } = dataEvento;
+
+    if (dayjs(dataHoraInicio).isAfter(dataHoraFim)) {
+      showToast('A data de inicio não pode ser posterior a data fim!', {
+        type: 'error',
+      });
+      return;
+    }
+
     const input = {
       ...restDetail,
       dataEvento: {
